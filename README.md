@@ -2,31 +2,31 @@
 Building a Kinect from Scratch With Random Forests and Blender animations
 
 ## Final Flow
-	### Input Layer
+	## Input Layer
 		The input layer uses OpenKinect (https://openkinect.org/wiki/Main_Page) to pull the raw depth and RBG images off of the Kinect hardware. The depth image is sent to filter layer for pre-processing before it is run through the random forest for classification.
 	
-	### Filter Layer
+	## Filter Layer
 		The filter layer isolates the people (or person) from the background. This processed image is then sent to random forest for classification.
 
-	### Random Forest
+	## Random Forest
 		The random forest runs each pixel for classification based on difference of depth. This information is stored for markup and query.
 
-	### Markup and User API
+	## Markup and User API
 		The RBG image is marked with body parts and users are able to query API for body part locations.
 
 
 
 ## Gathering and Processing Training Data
-	### Overview
+### Overview
 		Blender 3D render software (https://www.blender.org/) was paired with Carnegie Mellon motion capture library (http://mocap.cs.cmu.edu/subjects.php) to produce both a depth image and marked color image for random forest training.
 
-	### Pre and Post Processing
+### Pre and Post Processing
 
-	### Scale
+### Scale
 
-	### Costs
+### Costs
 
-	### Flow
+### Flow
 
 
 ## Building Input Layer
@@ -35,37 +35,50 @@ Building a Kinect from Scratch With Random Forests and Blender animations
 
 ## Building Filter Layer
 
-	### Overview
+### Overview
+This layer is responsible for reducing the amount of noise in data before it is sent for classification. It must be flexible enough isolate a person or persons from background elements.
 
-	### Algorithm
+### Algorithm
 
-	### Implementation
+	find common color
+	for each pixel in cur. image != common color
+		expand and find island
 
-	### Challenges
+	for each pixel in prev. image != common color
+		expand and find island
+
+	if island moved from prev. to cur
+		isolate to separate layer for classification
+
+
+### Implementation
+	Nitty gitty bits here of why, how and trade offs
+
+### Challenges
 
 
 
 ## Building Random Forests
 
-	### Overview
+### Overview
 
-	### Algorithm
+### Algorithm
 
-	### Implementation
+### Implementation
 
-	### Challenges
+### Challenges
 
 
 ## Building Markup and User API
 
 
-	### Overview
+### Overview
 
-	### Algorithm
+### Algorithm
 
-	### Implementation
+### Implementation
 
-	### Challenges
+### Challenges
 
 
 ## Using the API
