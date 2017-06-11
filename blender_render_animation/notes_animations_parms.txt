@@ -1,0 +1,45 @@
+##Mac
+blender "/Users/Admin/Desktop/TestKinect/mocap/mocap.blend" --background -S Scene --python-text API -a -- "/Users/Admin/Desktop/TestKinect/mocap/05_02.bvh" "Human_heavy" -4.9 .3125 "/Users/Admin/Desktop/TestKinect/mocap/output"
+
+
+#Linux
+blender "/home/ubuntu/mocap.blend" --background -S Scene --python-text API -a -- "/home/ubuntu/mocap_files/01/01_01.bvh" "Human_heavy" -4.9 .3125 "/home/ubuntu/brenda/brenda-outdir.tmp/01_01_Human_heavy"
+
+
+blender mocap.blend --background -S Scene --python-text API -a -- 05_02.bvh "Human_heavy" -4.9 .3125
+
+Always 4.9-8.1 meters away from camera
+
+Convert to 11-bit post proccesing
+
+pixal_value = (distance_from_camera + offset) * rate * 65535
+
+
+Range .8 to 4 meters for kinect
+https://msdn.microsoft.com/en-us/library/hh973078.aspx#Depth_Ranges
+
+
+So scale for mo-cap and do trim later:
+4.9
+8.1
+
+
+b = -.78125
+r = .3125
+
+
+
+
+Mo-cap 3-4 meters??
+
+1 = -4 + x*.2  --> 9
+0 = -4 + x*.2  --> 4
+
+For mac:
+/c/tmp/output/06_02/color/06_02_c_0001.png
+/c/tmp/output/06_02/depth/06_02_d_0001.png
+
+For AWS:
+/mnt/brenda/brenda-outdir1.tmp
+/c/tmp/output/06_02/depth/06_02_d_0114.png
+

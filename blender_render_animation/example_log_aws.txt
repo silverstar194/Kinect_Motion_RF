@@ -1,0 +1,220 @@
+------- ec2-52-53-232-114.us-west-1.compute.amazonaws.com
+ALSA lib confmisc.c:392:(snd_func_concat) error evaluating strings
+ALSA lib conf.c:4292:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1251:(snd_func_refer) error evaluating name
+ALSA lib conf.c:4292:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4771:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2266:(snd_pcm_open_noupdate) Unknown PCM default
+AL lib: (EE) ALCplaybackAlsa_open: Could not open playback device 'default': No such file or directory
+******* REASSERT active 1
+******* REASSERT active 1
+******* REASSERT active 1
+------- ec2-52-53-165-240.us-west-1.compute.amazonaws.com
+Fra:219 Mem:262.95M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Meshes Flags
+Fra:219 Mem:262.95M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Objects
+Fra:219 Mem:262.95M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Objects | Copying Transformations to device
+Fra:219 Mem:262.95M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Objects | Applying Static Transformations
+Fra:219 Mem:262.95M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Meshes
+Fra:219 Mem:263.39M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Mesh | Computing attributes
+Fra:219 Mem:264.71M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Mesh | Copying Attributes to device
+Fra:219 Mem:264.71M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:1.32M, Peak:1.32M | Scene, RenderLayer | Updating Scene BVH | Building
+Fra:219 Mem:262.39M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:1.32M, Peak:1.32M | Scene, RenderLayer | Updating Scene BVH | Building BVH
+Fra:219 Mem:264.04M (0.00M, Peak 417.95M) | Time:00:00.03 | Mem:1.32M, Peak:1.32M | Scene, RenderLayer | Updating Scene BVH | Packing BVH triangles and strands
+------- ec2-54-183-35-102.us-west-1.compute.amazonaws.com
+ALSA lib confmisc.c:392:(snd_func_concat) error evaluating strings
+ALSA lib conf.c:4292:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1251:(snd_func_refer) error evaluating name
+ALSA lib conf.c:4292:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4771:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2266:(snd_pcm_open_noupdate) Unknown PCM default
+AL lib: (EE) ALCplaybackAlsa_open: Could not open playback device 'default': No such file or directory
+******* REASSERT active 1
+******* REASSERT active 1
+******* REASSERT active 1
+------- ec2-54-183-195-213.us-west-1.compute.amazonaws.com
+Fra:207 Mem:302.34M (0.00M, Peak 417.95M) | Time:00:00.32 | Compositing | Tile 6-20
+| Time:00:00.32 | Compositing | Tile 13-20
+Fra:207 Mem:302.34M (0.00M, Peak 417.95M) | Time:00:00.32 | Compositing | Tile 15-20
+Fra:207 Mem:302.34M (0.00M, Peak 417.95M) Fra:207 Mem:302.34M (0.00M, Peak 417.95M) Fra:207 Mem:302.34M (0.00M, Peak 417.95M) | Time:00:00.32 | Compositing | Tile 14-20| Time:00:00.32 | Compositing | Tile 16-20
+
+| Time:00:00.32 | Compositing | Tile 17-20
+Fra:207 Mem:302.34M (0.00M, Peak 417.95M) | Time:00:00.32 | Compositing | Tile 18-20
+Fra:207 Mem:302.34M (0.00M, Peak 417.95M) | Time:00:00.32 | Compositing | Tile 19-20
+Fra:207 Mem:302.34M (0.00M, Peak 417.95M) | Time:00:00.32 | Compositing | Tile 20-20
+Fra:207 Mem:302.34M (0.00M, Peak 417.95M) | Time:00:00.32 | Compositing | De-initializing execution
+------- ec2-54-183-220-17.us-west-1.compute.amazonaws.com
+Fra:64 Mem:281.19M (0.00M, Peak 417.95M) | Time:00:00.11 | Remaining:00:00.17 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 85/300
+Fra:64 Mem:281.19M (0.00M, Peak 417.95M) | Time:00:00.11 | Remaining:00:00.17 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 86/300
+Fra:64 Mem:281.19M (0.00M, Peak 417.95M) | Time:00:00.11 | Remaining:00:00.17 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 87/300
+Fra:64 Mem:281.19M (0.00M, Peak 417.95M) | Time:00:00.11 | Remaining:00:00.17 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 88/300
+Fra:64 Mem:281.19M (0.00M, Peak 417.95M) | Time:00:00.12 | Remaining:00:00.16 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 89/300
+Fra:64 Mem:281.19M (0.00M, Peak 417.95M) | Time:00:00.12 | Remaining:00:00.16 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 90/300
+Fra:64 Mem:281.19M (0.00M, Peak 417.95M) | Time:00:00.12 | Remaining:00:00.16 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 91/300
+Fra:64 Mem:281.19M (0.00M, Peak 417.95M) | Time:00:00.12 | Remaining:00:00.16 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 92/300
+Fra:64 Mem:281.19M (0.00M, Peak 417.95M) | Time:00:00.12 | Remaining:00:00.16 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 93/300
+Fra:64 Mem:281.19M (0.00M, Peak 417.95M) | Time:00:00.12 | Remaining:00:00.16 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 94/300
+------- ec2-54-215-237-67.us-west-1.compute.amazonaws.com
+Fra:45 Mem:280.59M (0.00M, Peak 417.95M) | Time:00:00.12 | Remaining:00:00.16 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 95/300
+Fra:45 Mem:280.59M (0.00M, Peak 417.95M) | Time:00:00.12 | Remaining:00:00.16 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 96/300
+Fra:45 Mem:280.59M (0.00M, Peak 417.95M) | Time:00:00.12 | Remaining:00:00.16 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 97/300
+Fra:45 Mem:280.59M (0.00M, Peak 417.95M) | Time:00:00.12 | Remaining:00:00.16 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 98/300
+Fra:45 Mem:280.59M (0.00M, Peak 417.95M) | Time:00:00.13 | Remaining:00:00.16 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 99/300
+Fra:45 Mem:280.59M (0.00M, Peak 417.95M) | Time:00:00.13 | Remaining:00:00.16 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 100/300
+Fra:45 Mem:280.59M (0.00M, Peak 417.95M) | Time:00:00.13 | Remaining:00:00.16 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 101/300
+Fra:45 Mem:280.59M (0.00M, Peak 417.95M) | Time:00:00.13 | Remaining:00:00.16 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 102/300
+Fra:45 Mem:280.59M (0.00M, Peak 417.95M) | Time:00:00.13 | Remaining:00:00.16 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 103/300
+Fra:45 Mem:280.59M (0.00M, Peak 417.95M) | Time:00:00.13 | Remaining:00:00.15 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 104/300
+------- ec2-54-153-7-2.us-west-1.compute.amazonaws.com
+Fra:3 Mem:260.51M (0.00M, Peak 417.95M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Camera
+Fra:3 Mem:260.51M (0.00M, Peak 417.95M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Meshes Flags
+Fra:3 Mem:260.51M (0.00M, Peak 417.95M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Objects
+Fra:3 Mem:260.51M (0.00M, Peak 417.95M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Objects | Copying Transformations to device
+Fra:3 Mem:260.51M (0.00M, Peak 417.95M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Objects | Applying Static Transformations
+Fra:3 Mem:260.51M (0.00M, Peak 417.95M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Meshes
+Fra:3 Mem:260.95M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Mesh | Computing attributes
+Fra:3 Mem:262.27M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Mesh | Copying Attributes to device
+Fra:3 Mem:262.27M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:1.32M, Peak:1.32M | Scene, RenderLayer | Updating Scene BVH | Building
+Fra:3 Mem:259.96M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:1.32M, Peak:1.32M | Scene, RenderLayer | Updating Scene BVH | Building BVH
+------- ec2-54-183-205-11.us-west-1.compute.amazonaws.com
+Fra:155 Mem:281.17M (0.00M, Peak 417.95M) | Time:00:00.10 | Remaining:00:00.19 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 62/300
+Fra:155 Mem:281.17M (0.00M, Peak 417.95M) | Time:00:00.10 | Remaining:00:00.19 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 63/300
+Fra:155 Mem:281.17M (0.00M, Peak 417.95M) | Time:00:00.10 | Remaining:00:00.19 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 64/300
+Fra:155 Mem:281.17M (0.00M, Peak 417.95M) | Time:00:00.10 | Remaining:00:00.18 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 65/300
+Fra:155 Mem:281.17M (0.00M, Peak 417.95M) | Time:00:00.10 | Remaining:00:00.18 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 66/300
+Fra:155 Mem:281.17M (0.00M, Peak 417.95M) | Time:00:00.10 | Remaining:00:00.18 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 67/300
+Fra:155 Mem:281.17M (0.00M, Peak 417.95M) | Time:00:00.10 | Remaining:00:00.18 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 68/300
+Fra:155 Mem:281.17M (0.00M, Peak 417.95M) | Time:00:00.10 | Remaining:00:00.18 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 69/300
+Fra:155 Mem:281.17M (0.00M, Peak 417.95M) | Time:00:00.10 | Remaining:00:00.18 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 70/300
+Fra:155 Mem:281.17M (0.00M, Peak 417.95M) | Time:00:00.10 | Remaining:00:00.18 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 71/300
+------- ec2-54-193-14-51.us-west-1.compute.amazonaws.com
+Fra:151 Mem:283.21M (0.00M, Peak 417.95M) | Time:00:00.08 | Remaining:00:00.21 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 39/300
+Fra:151 Mem:283.21M (0.00M, Peak 417.95M) | Time:00:00.08 | Remaining:00:00.21 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 40/300
+Fra:151 Mem:283.21M (0.00M, Peak 417.95M) | Time:00:00.08 | Remaining:00:00.20 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 41/300
+Fra:151 Mem:283.21M (0.00M, Peak 417.95M) | Time:00:00.08 | Remaining:00:00.20 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 42/300
+Fra:151 Mem:283.21M (0.00M, Peak 417.95M) | Time:00:00.08 | Remaining:00:00.20 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 43/300
+Fra:151 Mem:283.21M (0.00M, Peak 417.95M) | Time:00:00.08 | Remaining:00:00.20 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 44/300
+Fra:151 Mem:283.21M (0.00M, Peak 417.95M) | Time:00:00.08 | Remaining:00:00.20 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 45/300
+Fra:151 Mem:283.21M (0.00M, Peak 417.95M) | Time:00:00.09 | Remaining:00:00.20 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 46/300
+Fra:151 Mem:283.21M (0.00M, Peak 417.95M) | Time:00:00.09 | Remaining:00:00.20 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 47/300
+Fra:151 Mem:283.21M (0.00M, Peak 417.95M) | Time:00:00.09 | Remaining:00:00.20 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 48/300
+------- ec2-54-219-137-45.us-west-1.compute.amazonaws.com
+Fra:129 Mem:286.05M (0.00M, Peak 417.95M) | Time:00:00.25 | Remaining:00:00.03 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 256/300
+Fra:129 Mem:286.05M (0.00M, Peak 417.95M) | Time:00:00.25 | Remaining:00:00.03 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 257/300
+Fra:129 Mem:286.05M (0.00M, Peak 417.95M) | Time:00:00.25 | Remaining:00:00.03 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 258/300
+Fra:129 Mem:286.05M (0.00M, Peak 417.95M) | Time:00:00.26 | Remaining:00:00.03 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 259/300
+Fra:129 Mem:286.05M (0.00M, Peak 417.95M) | Time:00:00.26 | Remaining:00:00.03 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 260/300
+Fra:129 Mem:286.05M (0.00M, Peak 417.95M) | Time:00:00.26 | Remaining:00:00.03 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 261/300
+Fra:129 Mem:286.05M (0.00M, Peak 417.95M) | Time:00:00.26 | Remaining:00:00.03 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 262/300
+Fra:129 Mem:286.05M (0.00M, Peak 417.95M) | Time:00:00.26 | Remaining:00:00.03 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 263/300
+Fra:129 Mem:286.05M (0.00M, Peak 417.95M) | Time:00:00.26 | Remaining:00:00.03 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 264/300
+Fra:129 Mem:286.05M (0.00M, Peak 417.95M) | Time:00:00.26 | Remaining:00:00.03 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 265/300
+------- ec2-54-183-206-54.us-west-1.compute.amazonaws.com
+==== Uploaded /home/ubuntu/brenda/brenda-outdir.tmp/11_01_Male_normal/depth/11_01_d_0009.png to S3 and Removed
+==== Uploaded /home/ubuntu/brenda/brenda-outdir.tmp/11_01_Male_normal/depth/11_01_d_0016.png to S3 and Removed
+==== Uploaded /home/ubuntu/brenda/brenda-outdir.tmp/11_01_Male_normal/depth/11_01_d_0030.png to S3 and Removed
+==== Uploaded /home/ubuntu/brenda/brenda-outdir.tmp/11_01_Male_normal/depth/11_01_d_0003.png to S3 and Removed
+==== Uploaded /home/ubuntu/brenda/brenda-outdir.tmp/11_01_Male_normal/depth/11_01_d_0018.png to S3 and Removed
+==== Uploaded /home/ubuntu/brenda/brenda-outdir.tmp/11_01_Male_normal/depth/11_01_d_0004.png to S3 and Removed
+==== Uploaded /home/ubuntu/brenda/brenda-outdir.tmp/11_01_Male_normal/depth/11_01_d_0036.png to S3 and Removed
+==== Uploaded /home/ubuntu/brenda/brenda-outdir.tmp/11_01_Male_normal/depth/11_01_d_0034.png to S3 and Removed
+==== Uploaded /home/ubuntu/brenda/brenda-outdir.tmp/11_01_Male_normal/depth/11_01_d_0098.png to S3 and Removed
+==== Uploaded /home/ubuntu/brenda/brenda-outdir.tmp/11_01_Male_normal/depth/11_01_d_0101.png to S3 and Removed
+------- ec2-54-183-190-117.us-west-1.compute.amazonaws.com
+Fra:39 Mem:257.75M (0.00M, Peak 417.95M) | Time:00:00.29 | Compositing | Determining resolution
+Fra:39 Mem:257.75M (0.00M, Peak 417.95M) | Time:00:00.29 | Compositing | Initializing execution
+Fra:39 Mem:299.94M (0.00M, Peak 417.95M) | Time:00:00.29 | Compositing | Tile 1-20
+Fra:39 Mem:299.94M (0.00M, Peak 417.95M) | Time:00:00.29 | Compositing | Tile 2-20
+Fra:39 Mem:299.94M (0.00M, Peak 417.95M) | Time:00:00.29 | Compositing | Tile 3-20
+Fra:39 Mem:299.94M (0.00M, Peak 417.95M) | Time:00:00.29 | Compositing | Tile 6-20
+Fra:39 Mem:299.94M (0.00M, Peak 417.95M) | Time:00:00.29 | Compositing | Tile 5-20
+Fra:39 Mem:299.94M (0.00M, Peak 417.95M) | Time:00:00.29 | Compositing | Tile 7-20
+Fra:39 Mem:299.94M (0.00M, Peak 417.95M) | Time:00:00.29 | Compositing | Tile 8-20
+Fra:39 Mem:299.94M (0.00M, Peak 417.95M) | Time:00:00.29 | Compositing | Tile 9-20
+------- ec2-54-215-239-85.us-west-1.compute.amazonaws.com
+Fra:22 Mem:280.89M (0.00M, Peak 417.95M) | Time:00:00.29 | Remaining:00:00.00 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 300/300
+Fra:22 Mem:279.90M (0.00M, Peak 417.95M) | Time:00:00.29 | Remaining:00:00.00 | Mem:21.44M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 300/300, Sample 6/6
+Fra:22 Mem:279.76M (0.00M, Peak 417.95M) | Time:00:00.29 | Mem:21.29M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 300/300
+Fra:22 Mem:279.76M (0.00M, Peak 417.95M) | Time:00:00.29 | Mem:21.29M, Peak:22.42M | Scene, RenderLayer | Finished
+Fra:22 Mem:257.79M (0.00M, Peak 417.95M) | Time:00:00.29 | Compositing
+Fra:22 Mem:257.79M (0.00M, Peak 417.95M) | Time:00:00.29 | Compositing | Determining resolution
+Fra:22 Mem:257.79M (0.00M, Peak 417.95M) | Time:00:00.29 | Compositing | Initializing execution
+Fra:22 Mem:299.98M (0.00M, Peak 417.95M) | Time:00:00.30 | Compositing | Tile 1-20
+Fra:22 Mem:299.98M (0.00M, Peak 417.95M) | Time:00:00.30 | Compositing | Tile 2-20
+Fra:22 Mem:299.98M (0.00M, Peak 417.95M) | Time:00:00.30 | Compositing | Tile 3-20
+------- ec2-54-219-160-149.us-west-1.compute.amazonaws.com
+Fra:152 Mem:262.92M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Camera
+Fra:152 Mem:262.92M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Meshes Flags
+Fra:152 Mem:262.92M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Objects
+Fra:152 Mem:262.92M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Objects | Copying Transformations to device
+Fra:152 Mem:262.92M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Objects | Applying Static Transformations
+Fra:152 Mem:262.92M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Meshes
+Fra:152 Mem:263.36M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Mesh | Computing attributes
+Fra:152 Mem:264.68M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, RenderLayer | Updating Mesh | Copying Attributes to device
+Fra:152 Mem:264.68M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:1.32M, Peak:1.32M | Scene, RenderLayer | Updating Scene BVH | Building
+Fra:152 Mem:262.37M (0.00M, Peak 417.95M) | Time:00:00.02 | Mem:1.32M, Peak:1.32M | Scene, RenderLayer | Updating Scene BVH | Building BVH
+------- ec2-54-67-85-96.us-west-1.compute.amazonaws.com
+Fra:162 Mem:281.58M (0.00M, Peak 417.95M) | Time:00:00.09 | Remaining:00:00.19 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 55/300
+Fra:162 Mem:281.58M (0.00M, Peak 417.95M) | Time:00:00.09 | Remaining:00:00.19 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 56/300
+Fra:162 Mem:281.58M (0.00M, Peak 417.95M) | Time:00:00.09 | Remaining:00:00.19 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 57/300
+Fra:162 Mem:281.58M (0.00M, Peak 417.95M) | Time:00:00.09 | Remaining:00:00.19 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 58/300
+Fra:162 Mem:281.58M (0.00M, Peak 417.95M) | Time:00:00.09 | Remaining:00:00.19 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 59/300
+Fra:162 Mem:281.58M (0.00M, Peak 417.95M) | Time:00:00.09 | Remaining:00:00.19 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 60/300
+Fra:162 Mem:281.58M (0.00M, Peak 417.95M) | Time:00:00.09 | Remaining:00:00.19 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 61/300
+Fra:162 Mem:281.58M (0.00M, Peak 417.95M) | Time:00:00.10 | Remaining:00:00.19 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 62/300
+Fra:162 Mem:281.58M (0.00M, Peak 417.95M) | Time:00:00.10 | Remaining:00:00.19 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 63/300
+Fra:162 Mem:281.58M (0.00M, Peak 417.95M) | Time:00:00.10 | Remaining:00:00.19 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 64/300
+------- ec2-54-67-23-206.us-west-1.compute.amazonaws.com
+Fra:70 Mem:280.57M (0.00M, Peak 417.95M) | Time:00:00.18 | Remaining:00:00.11 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 165/300
+Fra:70 Mem:280.57M (0.00M, Peak 417.95M) | Time:00:00.18 | Remaining:00:00.11 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 166/300
+Fra:70 Mem:280.57M (0.00M, Peak 417.95M) | Time:00:00.18 | Remaining:00:00.11 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 167/300
+Fra:70 Mem:280.57M (0.00M, Peak 417.95M) | Time:00:00.18 | Remaining:00:00.11 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 168/300
+Fra:70 Mem:280.57M (0.00M, Peak 417.95M) | Time:00:00.18 | Remaining:00:00.10 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 169/300
+Fra:70 Mem:280.57M (0.00M, Peak 417.95M) | Time:00:00.18 | Remaining:00:00.10 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 170/300
+Fra:70 Mem:280.57M (0.00M, Peak 417.95M) | Time:00:00.18 | Remaining:00:00.10 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 171/300
+Fra:70 Mem:280.57M (0.00M, Peak 417.95M) | Time:00:00.18 | Remaining:00:00.10 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 172/300
+Fra:70 Mem:280.57M (0.00M, Peak 417.95M) | Time:00:00.18 | Remaining:00:00.10 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 173/300
+Fra:70 Mem:280.57M (0.00M, Peak 417.95M) | Time:00:00.19 | Remaining:00:00.10 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 174/300
+------- ec2-54-67-83-48.us-west-1.compute.amazonaws.com
+      rightupleg        thigh.R
+        rightleg         shin.R
+       rightfoot         foot.R
+    righttoebase          toe.R
+Auto T-pose Male_normal
+0 (0.0 pct)
+100 (62.1 pct)
+Retargeted Y_10_01 --> Male_normal (100 pct)
+Curves simplified
+/home/ubuntu/mocap_files/10/10_01.bvh finished in 5.657 s
+------- ec2-54-67-12-51.us-west-1.compute.amazonaws.com
+Fra:160 Mem:281.57M (0.00M, Peak 417.95M) | Time:00:00.08 | Remaining:00:00.21 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 39/300
+Fra:160 Mem:281.57M (0.00M, Peak 417.95M) | Time:00:00.08 | Remaining:00:00.21 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 40/300
+Fra:160 Mem:281.57M (0.00M, Peak 417.95M) | Time:00:00.08 | Remaining:00:00.20 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 41/300
+Fra:160 Mem:281.57M (0.00M, Peak 417.95M) | Time:00:00.08 | Remaining:00:00.20 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 42/300
+Fra:160 Mem:281.57M (0.00M, Peak 417.95M) | Time:00:00.08 | Remaining:00:00.20 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 43/300
+Fra:160 Mem:281.57M (0.00M, Peak 417.95M) | Time:00:00.08 | Remaining:00:00.20 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 44/300
+Fra:160 Mem:281.57M (0.00M, Peak 417.95M) | Time:00:00.08 | Remaining:00:00.20 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 45/300
+Fra:160 Mem:281.57M (0.00M, Peak 417.95M) | Time:00:00.08 | Remaining:00:00.20 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 46/300
+Fra:160 Mem:281.57M (0.00M, Peak 417.95M) | Time:00:00.08 | Remaining:00:00.20 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 47/300
+Fra:160 Mem:281.57M (0.00M, Peak 417.95M) | Time:00:00.08 | Remaining:00:00.20 | Mem:22.42M, Peak:22.42M | Scene, RenderLayer | Path Tracing Tile 48/300
+------- ec2-54-67-9-122.us-west-1.compute.amazonaws.com
+Fra:44 Mem:280.40M (0.00M, Peak 417.95M) | Time:00:00.05 | Mem:22.00M, Peak:22.00M | Scene, RenderLayer | Path Tracing Tile 5/300
+Fra:44 Mem:280.54M (0.00M, Peak 417.95M) | Time:00:00.05 | Mem:22.14M, Peak:22.14M | Scene, RenderLayer | Path Tracing Tile 6/300
+Fra:44 Mem:280.81M (0.00M, Peak 417.95M) | Time:00:00.05 | Mem:22.41M, Peak:22.41M | Scene, RenderLayer | Path Tracing Tile 8/300
+Fra:44 Mem:280.82M (0.00M, Peak 417.95M) | Time:00:00.06 | Remaining:00:00.26 | Mem:22.43M, Peak:22.43M | Scene, RenderLayer | Path Tracing Tile 9/300
+Fra:44 Mem:280.82M (0.00M, Peak 417.95M) | Time:00:00.06 | Remaining:00:00.27 | Mem:22.43M, Peak:22.43M | Scene, RenderLayer | Path Tracing Tile 10/300
+Fra:44 Mem:280.82M (0.00M, Peak 417.95M) | Time:00:00.06 | Remaining:00:00.25 | Mem:22.43M, Peak:22.43M | Scene, RenderLayer | Path Tracing Tile 11/300
+Fra:44 Mem:280.82M (0.00M, Peak 417.95M) | Time:00:00.06 | Remaining:00:00.25 | Mem:22.43M, Peak:22.43M | Scene, RenderLayer | Path Tracing Tile 12/300
+Fra:44 Mem:280.82M (0.00M, Peak 417.95M) | Time:00:00.06 | Remaining:00:00.25 | Mem:22.43M, Peak:22.43M | Scene, RenderLayer | Path Tracing Tile 13/300
+Fra:44 Mem:280.68M (0.00M, Peak 417.95M) | Time:00:00.06 | Remaining:00:00.26 | Mem:22.29M, Peak:22.43M | Scene, RenderLayer | Path Tracing Tile 14/300
+Fra:44 Mem:280.82M (0.00M, Peak 417.95M) | Time:00:00.06 | Remaining:00:00.25 | Mem:22.43M, Peak:22.43M | Scene, RenderLayer | Path Tracing Tile 15/300
+------- ec2-54-67-34-71.us-west-1.compute.amazonaws.com
+Fra:10 Mem:299.78M (0.00M, Peak 417.95M) | Time:00:00.31 | Compositing | Tile 6-20
+Fra:10 Mem:299.78M (0.00M, Peak 417.95M) | Time:00:00.31 | Compositing | Tile 15-20
+Fra:10 Mem:299.78M (0.00M, Peak 417.95M) | Time:00:00.31 | Compositing | Tile 16-20
+Fra:10 Mem:299.78M (0.00M, Peak 417.95M) | Time:00:00.31 | Compositing | Tile 17-20
+Fra:10 Mem:299.78M (0.00M, Peak 417.95M) | Time:00:00.31 | Compositing | Tile 18-20
+Fra:10 Mem:299.78M (0.00M, Peak 417.95M) | Time:00:00.31 | Compositing | Tile 19-20
+Fra:10 Mem:299.78M (0.00M, Peak 417.95M) | Time:00:00.32 | Compositing | Tile 20-20
+Fra:10 Mem:299.77M (0.00M, Peak 417.95M) | Time:00:00.32 | Compositing | De-initializing execution
+Saved: /home/ubuntu/brenda/brenda-outdir.tmp/10_05_Male_normal/depth/10_05_d_0010.png
+Fra:10 Mem:281.02M (0.00M, Peak 417.95M) | Time:00:00.39 | Sce: Scene Ve:0 Fa:0 La:0
