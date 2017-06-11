@@ -2,17 +2,17 @@
 Building a Kinect from Scratch With Random Forests and Blender animations
 
 ## Final Flow
-	## Input Layer
-		The input layer uses OpenKinect (https://openkinect.org/wiki/Main_Page) to pull the raw depth and RBG images off of the Kinect hardware. The depth image is sent to filter layer for pre-processing before it is run through the random forest for classification.
+## Input Layer
+	The input layer uses OpenKinect (https://openkinect.org/wiki/Main_Page) to pull the raw depth and RBG images off of the Kinect hardware. The depth image is sent to filter layer for pre-processing before it is run through the random forest for classification.
 	
-	## Filter Layer
-		The filter layer isolates the people (or person) from the background. This processed image is then sent to random forest for classification.
+## Filter Layer
+	The filter layer isolates the people (or person) from the background. This processed image is then sent to random forest for classification.
 
-	## Random Forest
-		The random forest runs each pixel for classification based on difference of depth. This information is stored for markup and query.
+## Random Forest
+	The random forest runs each pixel for classification based on difference of depth. This information is stored for markup and query.
 
-	## Markup and User API
-		The RBG image is marked with body parts and users are able to query API for body part locations.
+## Markup and User API
+	The RBG image is marked with body parts and users are able to query API for body part locations.
 
 
 
@@ -52,7 +52,7 @@ This layer is responsible for reducing the amount of noise in data before it is 
 
 
 ### Implementation
-	Nitty gitty bits here of why, how and trade offs
+Nitty gitty bits here of why, how and trade offs
 
 ### Challenges
 
