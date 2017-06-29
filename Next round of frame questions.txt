@@ -1,5 +1,14 @@
 When comparing the five frames, are we have multiple lists of islands as the parameters?
+yes, must compare multiple islands.
+Think something like this so we can pass a single array between them:
+[frame1:[ island1:[(x,y) .. (x,y)] islandN:[(x,y) .. (x,y)] ] ..... frameN:[]]
+
 How are we deciding if the island is the same? size color?
+Followup: DO YOU MEAN BETWEEN FRAMES??
 	issues with that would be depth and person's movements
 	closer different color, arms tucked in, smaller size
+	
+	
 Are we thinking about multi player?
+
+Yes, need multi people support, won't be too bad as they'll be seperated into different layers for the ramdom forest, just tell which islands are humans (mini decicision tree)
