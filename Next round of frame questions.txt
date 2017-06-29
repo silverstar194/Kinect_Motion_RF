@@ -1,0 +1,5 @@
+When comparing the five frames, are we have multiple lists of islands as the parameters?
+How are we deciding if the island is the same? size color?
+	issues with that would be depth and person's movements
+	closer different color, arms tucked in, smaller size
+Are we thinking about multi player?
