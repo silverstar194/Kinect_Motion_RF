@@ -196,5 +196,24 @@ tribute work load
 
 
 Notes for later reference:
-Exspanding file system:
-http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#recognize-expanded-volume-linux
++Exspanding file system:
+++http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#recognize-expanded-volume-linux
++Building Kinect
+++https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/BodyPartRecognition.pdf
+++http://www.cs.cornell.edu/courses/cs7670/2011fa/lectures/zhaoyin_kinect.pdf
+++https://archive.org/details/Microsoft_Research_Video_148136
+++https://docs.google.com/presentation/d/1tzhm_HBEcg4_a-Wx52E0ACrzy0jmAphHpwhFFITo4g0/edit#slide=id.p53
+
++Real-time human pose recognition in parts from a single depth image
+++http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.297.3923&rep=rep1&type=pdf
+++http://www.makehumancommunity.org/forum/viewtopic.php?f=7&t=13313
+++http://vestan.github.io/#
+
++Excellent post on data
+++https://alastaira.wordpress.com/2013/07/24/using-free-mocap-data-for-game-character-animation-in-unity/
+
++Shading Unity:
+++http://willychyr.com/2013/11/unity-shaders-depth-and-normal-textures-part-3/
+
++Get Kinect Data (Java):
+++http://peterabeles.com/blog/?p=226
