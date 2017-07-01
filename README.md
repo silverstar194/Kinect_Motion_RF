@@ -234,3 +234,7 @@ Notes for later reference:
 
 + Get Kinect Data (Java):
 ++ http://peterabeles.com/blog/?p=226
+
+
+```growpart /dev/xvdb 1
+```
