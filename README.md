@@ -193,3 +193,8 @@ Island Classification, RTree Classification and Annotate + API:
 tribute work load
 + Will write and read from a single passed frame and will run synchronous with eachother but asynchronous with threads 1 and 2
 
+
+
+Notes for later reference:
+Exspanding file system:
+http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#recognize-expanded-volume-linux
