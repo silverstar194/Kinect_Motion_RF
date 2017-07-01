@@ -24,21 +24,21 @@ Blender 3D render software (https://www.blender.org/) was paired with Carnegie M
 
 ### Scale
 The humans needed to be scaled in two ways:
-1. Body proportions needed to be accurate to real life
-2. The depth scale from black to white needed to be repersentative of the data th kinect hardware would provide. There were three paramaters to consider.
-	a. rate of change from white to black
-	b. range of shades between white to black
-	c. range in meters that kinect data is collected from
++ 1. Body proportions needed to be accurate to real life
++ 2. The depth scale from black to white needed to be repersentative of the data th kinect hardware would provide. There were three paramaters to consider.
+++ a. rate of change from white to black
+++ b. range of shades between white to black
+++ c. range in meters that kinect data is collected from
 
 ### Costs
 AWS was leveraged heavly for computational power, storage, queuing and data transfer.
 
 Break down in services and cost follows:
 
-EBS (Elastic Block Storage)
-EC2 (Elastic Compute Cloud)
-SQS (Simple Queue Service)
-S3 (Simple Storage Service)
++ EBS (Elastic Block Storage)
++ EC2 (Elastic Compute Cloud)
++ SQS (Simple Queue Service)
++ S3 (Simple Storage Service)
 
 
 ### Flow
