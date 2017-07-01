@@ -1,7 +1,9 @@
 
 class island_classification:
 
-	class frame_island_forming:
+	##store for past frames that are used to compare across
+
+	class frame_island_classification:
 		##ref to island forming class
 		#array of human island(s)
 			# [	island1:[
@@ -16,4 +18,19 @@ class island_classification:
 			# 			(x,y)
 			# 			]
 			# ]
+
+	def get_human_islands():
+		##returns the frame_island_forming class
+		##with human islands array
+
+
+	def find_human islands():
+		##keep pulling frames from island_forming queue
+		##until a set is island is moving significantly
+
+
+	def move_significantly):
+		##a statistically significantly movement above the average movement
+		##can use a proportions test here
+
 
