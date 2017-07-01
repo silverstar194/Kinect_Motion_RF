@@ -85,3 +85,109 @@ Nitty gitty bits here of why, how and trade offs
 ## Using the API
 
 	DOCS FOR API USAGE
+	
+## The C++ Part TODO:[Move this section and split later]
+
+### Pre-built decision tree:
+To start off the program we need to built the decision tree that will be used for classication of body parts. 
+Given a list of parent child relationships and split information build decisions trees.
+
+```
+Example:
+Tree #	Parent Node	Child Node	Split Info. (index, value - less then/more then)
+1	asdf8x8		mba80nd		9 < 87 		##Inner Node
+1	asdf8x8		hasdf78		80 < 2001 	##Inner Node
+1	null		asdf8x8		52 > 10 	##Root Node
+1	mba80nd		[1, 2, 3, 4]	32 < 09 	##Leaf Node 
+…
+more nodes and nodes for other trees as well
+
+This will build tree 1 like this (given rows 1-4):
+		 asdf8x8
+		/	\
+      	       /	 \
+	mba80nd		hasdf78
+		\		\
+		 \		 \
+ 	 dis:[1, 2, 3, 4]	  …
+```
+
+This leaf node holds a distribution of likelyhood (as %) where:
+
+	dis[index_of_category] / sum(dis)
+
+thus likelihood of category 3 would be 40% (4/10)
+
+
+We must also remember there are multiple trees so for the end decision of what the part is it needs to be the most likely across all trees.
+
+### Flow Post-Tree Building:
+1. Input (Thread #1)
++ Interacts with the Kinect Layer to pull frames off of hardware
+
+2. Island Forming (Thread #2)
++ Pulls frames from Input queue and filters out islands
+
+3. Island Classification (Thread #3)
++ Pulls frames from Island Forming and decides which islands are human-like based on movement between frames
+
+4. Calculate Attributes (Thread #4 - Thread #N —- Concurrent threads for each pixel up to core limit)
++ Produces delta vector of attribute vales
++ The attributes are compulted from the differnce in current pixel and pixels surrounding it:
+	```
+	Example:
+		********************************
+		********************************
+		********2******-1***************
+		*********100*****-1***6*********
+		********5****2*X*0***5**********
+		**********3****-1*****7*********
+		*********2*****-3****4**********
+		********9*******-4**************
+		********************************
+		********************************
+	Say pixel X is current pixel up for classification its attiribution vector is:
+	attrib: [2,-1,100,-1,6,5,2,0,5,3,-1,7,2,-3,4,9,-4]
+	```
+
+
+5. RTree Classification  (Thread #4 - Thread #N —- Concurrent threads for each pixel up to core limit)
++ Classifies each point based on delta vector
+
+
+6. Annotate + API
++ Marked up frame with body part color and output to video stream
++ Provide query API that will return array of tuples (x, y) of body part when asked for specific body part
+	
+	```
+	Example:
+	def getLeftArm():
+		return array[ALL_LEFT_ARM_PIXELS]
+	```
+		
+
+One important thing to one is how the threads are used through the proccessing steps:
+
+```
+Kinect Hardware
+|
+|
+V
+Thread 1: Input <--Queue-->
+	Thread 2: Island Forming <--Queue--> 
+				Thread 3: Island Classification --> Calculate Attributes --> RTree Classification --> Annotate + API
+				Thread 6: Island Classification --> Calculate Attributes --> RTree Classification --> Annotate + API
+					.....
+				Thread Core Limit: Island Classification --> Calculate Attributes --> RTree Classification --> Annotate + API
+```
+										
+Input and Island Forming: 
++ They will runs continuely polling loops to look for an proccess new data
++ They will all run asynchronous
+
+
+Island Classification, RTree Classification and Annotate + API:
++ They will draw from a queue and use a thread pool to manage and dis
+tribute work load
++ Will write and read from a single passed frame and will run synchronous with eachother but asynchronous with threads 1 and 2
+
