@@ -26,9 +26,10 @@ Blender 3D render software (https://www.blender.org/) was paired with Carnegie M
 The humans needed to be scaled in two ways:
 + 1. Body proportions needed to be accurate to real life
 + 2. The depth scale from black to white needed to be repersentative of the data th kinect hardware would provide. There were three paramaters to consider.
-++ a. rate of change from white to black
-++ b. range of shades between white to black
-++ c. range in meters that kinect data is collected from
+
+++ rate of change from white to black
+++ range of shades between white to black
+++ range in meters that kinect data is collected from
 
 ### Costs
 AWS was leveraged heavly for computational power, storage, queuing and data transfer.
@@ -211,24 +212,25 @@ tribute work load
 
 
 Notes for later reference:
-+Exspanding file system:
-++http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#recognize-expanded-volume-linux
-+Building Kinect
-++https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/BodyPartRecognition.pdf
-++http://www.cs.cornell.edu/courses/cs7670/2011fa/lectures/zhaoyin_kinect.pdf
-++https://archive.org/details/Microsoft_Research_Video_148136
-++https://docs.google.com/presentation/d/1tzhm_HBEcg4_a-Wx52E0ACrzy0jmAphHpwhFFITo4g0/edit#slide=id.p53
++ Exspanding file system:
+++ http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#recognize-expanded-volume-linux
 
-+Real-time human pose recognition in parts from a single depth image
-++http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.297.3923&rep=rep1&type=pdf
-++http://www.makehumancommunity.org/forum/viewtopic.php?f=7&t=13313
-++http://vestan.github.io/#
++ Building Kinect
+++ https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/BodyPartRecognition.pdf
+++ http://www.cs.cornell.edu/courses/cs7670/2011fa/lectures/zhaoyin_kinect.pdf
+++ https://archive.org/details/Microsoft_Research_Video_148136
+++ https://docs.google.com/presentation/d/1tzhm_HBEcg4_a-Wx52E0ACrzy0jmAphHpwhFFITo4g0/edit#slide=id.p53
 
-+Excellent post on data
-++https://alastaira.wordpress.com/2013/07/24/using-free-mocap-data-for-game-character-animation-in-unity/
++ Real-time human pose recognition in parts from a single depth image
+++ http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.297.3923&rep=rep1&type=pdf
+++ http://www.makehumancommunity.org/forum/viewtopic.php?f=7&t=13313
+++ http://vestan.github.io/#
 
-+Shading Unity:
-++http://willychyr.com/2013/11/unity-shaders-depth-and-normal-textures-part-3/
++ Excellent post on data
+++ https://alastaira.wordpress.com/2013/07/24/using-free-mocap-data-for-game-character-animation-in-unity/
 
-+Get Kinect Data (Java):
-++http://peterabeles.com/blog/?p=226
++ Shading Unity:
++ +http://willychyr.com/2013/11/unity-shaders-depth-and-normal-textures-part-3/
+
++ Get Kinect Data (Java):
+++ http://peterabeles.com/blog/?p=226
