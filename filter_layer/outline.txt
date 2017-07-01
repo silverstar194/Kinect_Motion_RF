@@ -1,0 +1,46 @@
+Pre-built decision tree:
+	Given a list of parent child relationships and split information build decisions trees.
+
+	Example:
+	Tree #	Parent Node	Child Node	Split Info. (index, value - less then/more then)
+	1	asdf8x8		mba80nd		9 < 87 		##Inner Node
+	1	asdf8x8		hasdf78		80 < 2001 	##Inner Node
+	1	null		asdf8x8		52 > 10 	##Root Node
+	1	mba80nd		[1, 2, 3, 4]	32 < 09 	##Leaf Node 
+	…
+	more nodes and nodes for other trees as well
+
+	This will build tree #1 like this (given rows 1-4):
+		asdf8x8
+		/	\
+      	       /	 \
+	mba80nd		hasdf78
+		\		\
+		 \		 \
+  	dis:[1, 2, 3, 4]	  …
+
+
+This leaf node holds a distribution of likelyhood (as %) where:
+	dis[index_of_category] / sum(dis)
+so likelihood of category 3 would be 40% (4/10)
+
+We must also remember there 
+	
+1. Input (Thread #1)
+	Interacts with the Kinect Layer to pull frames off of hardware
+
+2. Island Forming (Thread #2)
+	Pulls frames from Input queue and filters out islands
+
+3. Island Classification (Thread #3)
+	Pulls frames from Island Forming and decides which islands are human-like based on movement between frames
+
+3. Calculate Attributes (Thread #4 - Thread #N —- Concurrent threads for each pixel up to core limit)
+	Produces delta vector of attribute vales
+
+4. RTree Classification  (Thread #4 - Thread #N —- Concurrent threads for each pixel up to core limit)
+	Classifies each point based on delta vector
+
+5. Annotate + API
+	- Marked up frame with body part color and output to video stream
+	- Provide query API that will return array of tuples (x, y) of body part when asked for specific body part
