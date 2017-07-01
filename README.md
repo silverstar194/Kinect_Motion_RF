@@ -166,6 +166,8 @@ We must also remember there are multiple trees so for the end decision of what t
 	```
 		
 
+
+### General Flow and Threads
 One important thing to one is how the threads are used through the proccessing steps:
 
 ```
