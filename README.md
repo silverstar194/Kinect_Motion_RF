@@ -22,6 +22,8 @@ Blender 3D render software (https://www.blender.org/) was paired with Carnegie M
 
 ### Pre and Post Processing
 
+In post processing the frames needed to be trimmed to scaled. I found a memory issue in PIL image proccessing library and was only able to use 3 threads even with 144gb of memory. Some images ended up comsuming 30gb+.
+
 ### Scale
 The humans needed to be scaled in two ways:
 + 1. Body proportions needed to be accurate to real life
