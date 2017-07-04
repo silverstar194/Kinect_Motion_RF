@@ -1,5 +1,7 @@
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.awt.image.DataBufferUShort;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -26,10 +28,13 @@ public class Image {
 	
 	
 	public void loadImage(){
-		BufferedImage img = null;
+		
 		try {
-		    img = ImageIO.read(new File(this.absolutePath));
-		    this.imagePixalArray = ((DataBufferByte) img.getRaster().getDataBuffer()).getData();
+		    BufferedImage originalImage = ImageIO.read(new File(this.absolutePath));
+		    ByteArrayOutputStream imageStream = new ByteArrayOutputStream();
+		    ImageIO.write(originalImage, MasterConstants.FILETYPE, imageStream);
+		    this.imagePixalArray = imageStream.toByteArray();
+		    
 		} catch (IOException e) {
 			System.out.println("Failed to load image "+this.absolutePath);
 			System.exit(1);

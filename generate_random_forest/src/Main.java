@@ -12,6 +12,7 @@ public class Main {
 		for(String e : getImages.imageFiles){
 			System.out.println(e);
 			Image image = new Image(e);
+			image.loadImage();
 			MasterConstants.images.put(e, image);
 		}
 	}
