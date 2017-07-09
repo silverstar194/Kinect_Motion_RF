@@ -7,11 +7,17 @@ import java.util.Objects;
 public class XYPoint {
 
 	//Coordinates in image
-	public int x, y;
+	public int x, y, counter;
 
 	public XYPoint(int x, int y){
 		this.x = x;
 		this.y = y;
+	}
+	
+	public XYPoint(int x, int y, int counter){
+		this.x = x;
+		this.y = y;
+		this.counter = counter;
 	}
 	
 	/**
