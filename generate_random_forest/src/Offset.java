@@ -6,7 +6,7 @@ import java.util.ArrayList;
  */
 public class Offset {
 
-	//point to compute offsets from
+	//points calulated around XYPoint
 	public ArrayList<XYPoint> XYPoints;
 
 	public Offset(int x, int y){
