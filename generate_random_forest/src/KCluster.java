@@ -90,9 +90,8 @@ public class KCluster {
 
 	public ArrayList<Cluster> runClustering(){
 
-		plotRandomClusterCenters();
-
 		for(int i=0; i<100; i++){
+			plotRandomClusterCenters();
 			boolean allConverged = false;
 			while(!allConverged){
 				assignPoints();
