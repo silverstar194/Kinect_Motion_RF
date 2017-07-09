@@ -82,8 +82,10 @@ public class Image {
 	 * 
 	 */
 	public void unloadFrameImages(){
-		imagePixalArrayColor =null;
-		imagePixalArrayDepth =null;
+		this.imagePixalArrayColor = null;
+		this.imagePixalArrayDepth = null;
+		this.absolutePathColor = null;
+		this.absolutePathDepth = null;
 	}
 
 	/**
