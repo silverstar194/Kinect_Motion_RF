@@ -19,7 +19,7 @@ public class Offset {
 	 * The offsets form a radial pattern.
 	 */
 	private void fillXYOffsets(int x , int y){
-
+		int counter = 0;
 		for(int k=0; k<MasterConstants.NUM_PER_RING; k++){
 			for(int r=MasterConstants.INNER_RING; r<MasterConstants.OUTER_RING; r+=MasterConstants.INCR_RING){
 				
@@ -31,7 +31,7 @@ public class Offset {
 				if(yValue >= MasterConstants.IMG_HEIGHT || yValue < 0 || xValue >= MasterConstants.IMG_HEIGHT || xValue < 0){
 					continue;
 				}
-				this.XYPoints.add(new XYPoint(xValue, yValue));
+				this.XYPoints.add(new XYPoint(xValue, yValue, counter++));
 			}
 		}
 
