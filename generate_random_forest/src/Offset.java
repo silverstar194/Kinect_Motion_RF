@@ -23,11 +23,11 @@ public class Offset {
 		for(int k=0; k<MasterConstants.NUM_PER_RING; k++){
 			for(int r=MasterConstants.INNER_RING; r<MasterConstants.OUTER_RING; r+=MasterConstants.INCR_RING){
 				
-				//this will produce a nice distributes shape of points to look at
+				//this will produce a nice distribution
 				int xValue = (int)Math.floor(x+Math.sin(2*Math.PI/MasterConstants.NUM_PER_RING*k+r)*r);
 				int yValue = (int)Math.floor(y+Math.cos(2*Math.PI/MasterConstants.NUM_PER_RING*k+r)*r);
 
-				//if its out of the image is is discarded
+				//if its out of the image it is discarded
 				if(yValue >= MasterConstants.IMG_HEIGHT || yValue < 0 || xValue >= MasterConstants.IMG_HEIGHT || xValue < 0){
 					continue;
 				}
