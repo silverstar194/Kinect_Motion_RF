@@ -26,20 +26,7 @@ public class DataHandler {
 			System.out.println(file.getName());
 		}
 	}
-	/**
-	 * List all the files under a directory
-	 * @param directoryName to be listed
-	 */
-	public void listFiles(String directoryName){
-		File directory = new File(directoryName);
-		//get all the files from a directory
-		File[] fList = directory.listFiles();
-		for (File file : fList){
-			if (file.isFile()){
-				System.out.println(file.getName());
-			}
-		}
-	}
+
 	/**
 	 * List all the folder under a directory
 	 * @param directoryName to be listed
@@ -59,15 +46,16 @@ public class DataHandler {
 	 * @param directoryName to be listed
 	 */
 	ArrayList<String> imageFiles = new ArrayList<String>(MasterConstants.ESTIMATED_IMAGE_AMOUNT);
-	public void listFilesAndFilesSubDirectories(String directoryName, String fileType){
+	public void listFilesAndFilesSubDirectories(String directoryName, String fileType, String filterBy){
 		File directory = new File(directoryName);
+	
 		//get all the files from a directory
 		File[] fList = directory.listFiles();
 		for (File file : fList){
-			if (file.isFile() && file.getName().contains(fileType)){
+			if (file.isFile() && file.getName().contains(fileType) && file.getName().contains(filterBy)){
 				imageFiles.add(file.getAbsolutePath());
 			} else if (file.isDirectory()){
-				listFilesAndFilesSubDirectories(file.getAbsolutePath(), fileType);
+				listFilesAndFilesSubDirectories(file.getAbsolutePath(), fileType, filterBy);
 			}
 		}
 	}
