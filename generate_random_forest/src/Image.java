@@ -120,10 +120,8 @@ public class Image {
 				//Fetches the correct offsets from calculation or cache
 				Offset offsets = offsetCacheForCalulations.getOffSets(x, y);
 
-				//tracks attribute we are at to index into attributes array
-				int attributeNumber = 0;
+				
 				XYPoint xyPointKey = new XYPoint(x, y);
-
 				//loop through attributes
 				for(XYPoint xy : offsets.XYPoints){
 
@@ -143,7 +141,7 @@ public class Image {
 					//Casting to short will get least-significant 16-bit which is fine as out range is 0-2047
 					short grayScalePart = (short)(xyPointValue - yxOffsetValue);
 
-					attributes[attributeNumber++] = (short)(xyPointValue - yxOffsetValue);
+					attributes[xy.counter] = (short)(xyPointValue - yxOffsetValue);
 
 					Color rgb = new Color(imagePixalArrayColor.getRGB(x, y));
 
