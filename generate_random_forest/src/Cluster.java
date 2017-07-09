@@ -49,12 +49,14 @@ public class Cluster {
 		}
 		int numberOfPoints = pointsInCluster.size();
 
-	
+
+		
 		if(clusterCenter.x - (xsum/numberOfPoints) < 1 && clusterCenter.y - (ysum/numberOfPoints) < 1 && clusterCenter.z - (zsum/numberOfPoints) < 1){
 			this.converged = true;
+		}else{
+			this.clusterCenter = new XYZPoint(xsum/numberOfPoints, ysum/numberOfPoints, zsum/numberOfPoints);
 		}
-		this.clusterCenter = new XYZPoint(xsum/numberOfPoints, ysum/numberOfPoints, zsum/numberOfPoints);
-		
+
 	}
 	
 	@Override

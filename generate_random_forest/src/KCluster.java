@@ -41,12 +41,15 @@ public class KCluster {
 	 * Uniform Distribution
 	 */
 	private void plotRandomClusterCenters(){
+		clusters = new ArrayList<>();
 		for(int i=0; i<clusterNum; i++){
 			Cluster c = new Cluster(i);
 			int x = (int)(Math.random() * rangeX); 
 			int y = (int)(Math.random() * rangeY);
 			int z = (int)(Math.random() * rangeZ);
 			c.clusterCenter = (new XYZPoint(x, y, z));
+			
+			//clear old clusters
 			clusters.add(c);
 		}
 	}
@@ -83,21 +86,23 @@ public class KCluster {
 	}
 	
 	/**
-	 * Runs clustering 100 times w/ random restarts and takes the median choice for each point
+	 * Runs clustering 50 times w/ random restarts and takes the mode choice for each point
 	 * 
 	 * @return a list of clusters
 	 */
 
 	public ArrayList<Cluster> runClustering(){
 
-		for(int i=0; i<100; i++){
+		for(int i=0; i<15; i++){
 			plotRandomClusterCenters();
+			
 			boolean allConverged = false;
 			while(!allConverged){
 				assignPoints();
 				for(Cluster c : clusters){
 					
 					c.calucateCenter();
+
 					
 					for(Cluster x : clusters){
 						allConverged = true;
@@ -111,6 +116,7 @@ public class KCluster {
 				}
 
 			}
+			System.out.println(i);
 		}
 		
 		//this assigns the points based on the cluster they fell most frequently into
