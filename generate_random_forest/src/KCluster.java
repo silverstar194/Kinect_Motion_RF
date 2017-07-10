@@ -72,7 +72,7 @@ public class KCluster {
 			for(Cluster c : clusters){
 
 				//distance by straight line distance formula
-				double distance = distance(p.x, p.y, p.z, c.clusterCenter.x, c.clusterCenter.y, c.clusterCenter.z);
+				double distance = Math.pow((p.x - c.clusterCenter.x), 2) +  Math.pow(p.y-c.clusterCenter.y, 2)+ Math.pow(p.z-c.clusterCenter.z, 2);
 
 				if(smallestDistance > distance){
 					smallestDistance = distance;
@@ -130,18 +130,6 @@ public class KCluster {
 		}
 
 		return clusters;
-	}
-
-	private double distance(int r1, int g1, int b1, int r2, int g2, int b2){
-		double rmean = (r1 + r2)/2.0;
-
-		int r = r1 - r2;
-		int g = g1 - g2;
-		int b = b1 = b2;
-
-		double distance = Math.sqrt( (512+rmean*r*r))*Math.pow(2,8) + 4*g*g + ((767 - rmean*b*b)*Math.pow(2,8));
-
-		return distance;
 	}
 
 
