@@ -1,18 +1,12 @@
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
 import java.awt.image.DataBufferUShort;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import javax.imageio.ImageIO;
 
@@ -24,14 +18,14 @@ public class Image {
 
 	//holds file path for color image
 	private String absolutePathColor;
-	
+
 	//holds file path for depth image
 	private String absolutePathDepth;
-	
+
 	//data from read in image, this is only used to calculate attributes and the discarded to save memory
 	private BufferedImage imagePixalArrayColor;
 	private BufferedImage imagePixalArrayDepth;
-	
+
 	//attributes of the image that are used to classify in random forest
 	private HashMap<XYPoint, short[]> attributes;
 
@@ -48,7 +42,7 @@ public class Image {
 	 * @param offsetCacheForCalulations
 	 */
 	public Image(String absolutePathColor, String absolutePathDepth, OffsetCache offsetCacheForCalulations){
-		
+
 		if(!absolutePathColor.contains(MasterConstants.FILETYPE) || !absolutePathDepth.contains(MasterConstants.FILETYPE)){
 			System.out.println("Fle type violated "+absolutePathColor);
 			System.out.println("Fle type violated "+absolutePathDepth);
@@ -98,30 +92,47 @@ public class Image {
 		//fetch in the gray image date as a raw short data
 		DataBufferUShort buffer = (DataBufferUShort)imagePixalArrayDepth.getRaster().getDataBuffer();
 		short[] arrayUShort = buffer.getData();
-		
-		//this writes out the all colors to file for k-clustering analysis
-//		PrintWriter writer = null;
-//		try {
-//			writer = new PrintWriter(new FileOutputStream("colors.txt", true));
-//		} catch (FileNotFoundException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
 
 		//Loop through each pixel
 		for(int x=0; x<MasterConstants.IMG_WIDTH; x++){
 			for(int y=0; y<MasterConstants.IMG_HEIGHT; y++){
 
+				//get body part value of current point
+				Color rgb = new Color(imagePixalArrayColor.getRGB(x, y));
+				int bodyPartValue = Integer.parseInt(""+rgb.getRed()+rgb.getGreen()+rgb.getBlue());
+
+
 				//checks is pixel is background
-				if(((arrayUShort[x + y * MasterConstants.IMG_WIDTH] & 0xffff) >> 5) == 2047){
+				if(((arrayUShort[x + y * MasterConstants.IMG_WIDTH] & 0xffff) >> 5) == 2047 || bodyPartValue == 0){
 					continue;
 				}
 
 				//Fetches the correct offsets from calculation or cache
 				Offset offsets = offsetCacheForCalulations.getOffSets(x, y);
 
-				
+				//creates the current XY point as a key
 				XYPoint xyPointKey = new XYPoint(x, y);
+
+
+				short bodyPart = -1;
+				//if the bodyPart was not a "common color use surrounding pixels to guess part"
+				if(MasterConstants.MAP_COLORS_TO_PARTS.get(bodyPartValue) == null){
+					//use context
+					bodyPart = useContentToGetBodyPart(x, y);
+					
+					if(bodyPart == -1){
+						System.out.print("Something when very wrong with useContentToGetBodyPart(x ,y)");
+						System.exit(-1);
+					}
+					
+					//if background
+					if(bodyPart == 0){
+						continue;
+					}
+				}else{
+					bodyPart = (short)MasterConstants.MAP_COLORS_TO_PARTS.get(bodyPartValue);
+				}
+	
 				//loop through attributes
 				for(XYPoint xy : offsets.XYPoints){
 
@@ -141,12 +152,8 @@ public class Image {
 					//Casting to short will get least-significant 16-bit which is fine as out range is 0-2047
 					short grayScalePart = (short)(xyPointValue - yxOffsetValue);
 
-					attributes[xy.counter] = (short)(xyPointValue - yxOffsetValue);
-
-					Color rgb = new Color(imagePixalArrayColor.getRGB(x, y));
-
-					//write out for k-clustering
-//					writer.println(rgb.getRed() +","+rgb.getGreen()+","+rgb.getBlue());
+					//OR bitmask for bodyPart with grayScalePart part to set bits 12-15 indicating body part
+					attributes[xy.counter] =  (short)(bodyPart | grayScalePart);
 
 					this.attributes.put(xyPointKey, attributes);
 
@@ -155,10 +162,51 @@ public class Image {
 			}
 		}
 
-//		writer.close();
 	}
 
-	
+	private short useContentToGetBodyPart(int x, int y){
+		int[][] directions = {{1,0}, {0,1}, {1,1}, {-1,-1}, {-1,0}, {0,-1}, {1,-1}, {-1,1}};
+
+		Queue<XYPoint> queue = new LinkedList<>();
+		queue.add(new XYPoint(x,y));
+
+		while(!queue.isEmpty()){
+			XYPoint point = queue.poll();
+
+			Color rgb = new Color(imagePixalArrayColor.getRGB(point.x, point.y));
+			int bodyPartValue = Integer.parseInt(""+rgb.getRed()+rgb.getGreen()+rgb.getBlue());
+
+			//check for background that is not a perfect black
+			//size >200 prevents overflow in searching for (0, 0, 0)
+			//if its gone that far its not likely to be anything by background
+			if(bodyPartValue == 0 || queue.size() > 200){
+				return 0;
+			}
+
+			//look up body part
+			if(MasterConstants.MAP_COLORS_TO_PARTS.get(bodyPartValue) != null){
+				return MasterConstants.MAP_COLORS_TO_PARTS.get(bodyPartValue);
+			}
+
+			//add all surrounding pixels
+			for(int i=0; i<directions.length; i++){
+				int xNew = x+directions[i][0];
+				int yNew = y+directions[i][1];
+				
+				//check within image
+				if(xNew > -1 && xNew < MasterConstants.IMG_WIDTH && yNew > -1 && yNew < MasterConstants.IMG_HEIGHT){
+					queue.add(new XYPoint(xNew, yNew));
+				}
+
+			}
+
+		}
+
+		//this should never happen, caught as error
+		return -1;
+	}
+
+
 	@Override
 	public boolean equals(Object other) {
 		if (other == this) {

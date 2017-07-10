@@ -15,6 +15,8 @@ public class MainLoadImages {
 
 	public static void main(String[] args) throws FileNotFoundException{
 		
+		//init. mapping of (r, g, b) to body parts
+		MasterConstants.initMap();
 		DataHandler getImages = new DataHandler();
 		
 		//cache will store offsets for each pixel to help with speed

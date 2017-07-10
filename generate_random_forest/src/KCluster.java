@@ -13,7 +13,7 @@ public class KCluster {
 
 	//all xyPoints for analysis
 	private ArrayList<XYZPoint> xyzPoints;
-	
+
 	//holds ranges in which to randomly start points and how many clusters we want to form
 	private int rangeX, rangeY, rangeZ, clusterNum;
 	private ArrayList<Cluster> clusters;
@@ -48,7 +48,7 @@ public class KCluster {
 			int y = (int)(Math.random() * rangeY);
 			int z = (int)(Math.random() * rangeZ);
 			c.clusterCenter = (new XYZPoint(x, y, z));
-			
+
 			//clear old clusters
 			clusters.add(c);
 		}
@@ -70,9 +70,9 @@ public class KCluster {
 			double smallestDistance = Double.MAX_VALUE;
 			Cluster clusterWithSmallerDistance = null;
 			for(Cluster c : clusters){
-	
+
 				//distance by straight line distance formula
-				double distance = Math.pow((p.x - c.clusterCenter.x), 2) + 	Math.pow((p.y - c.clusterCenter.y), 2)  + Math.pow((p.z - c.clusterCenter.z), 2);
+				double distance = distance(p.x, p.y, p.z, c.clusterCenter.x, c.clusterCenter.y, c.clusterCenter.z);
 
 				if(smallestDistance > distance){
 					smallestDistance = distance;
@@ -84,7 +84,7 @@ public class KCluster {
 		}
 
 	}
-	
+
 	/**
 	 * Runs clustering 50 times w/ random restarts and takes the mode choice for each point
 	 * 
@@ -95,18 +95,18 @@ public class KCluster {
 
 		for(int i=0; i<15; i++){
 			plotRandomClusterCenters();
-			
+
 			boolean allConverged = false;
 			while(!allConverged){
 				assignPoints();
 				for(Cluster c : clusters){
-					
+
 					c.calucateCenter();
 
-					
+
 					for(Cluster x : clusters){
 						allConverged = true;
-						
+
 						//checks if all the clusters have converged if not keep going
 						if(!x.converged){
 							allConverged = false;
@@ -118,7 +118,7 @@ public class KCluster {
 			}
 			System.out.println(i);
 		}
-		
+
 		//this assigns the points based on the cluster they fell most frequently into
 		for(Cluster c : clusters){
 			c.pointsInCluster = new ArrayList<>();
@@ -128,9 +128,21 @@ public class KCluster {
 				}
 			}
 		}
-		
+
 		return clusters;
 	}
-	
+
+	private double distance(int r1, int g1, int b1, int r2, int g2, int b2){
+		double rmean = (r1 + r2)/2.0;
+
+		int r = r1 - r2;
+		int g = g1 - g2;
+		int b = b1 = b2;
+
+		double distance = Math.sqrt( (512+rmean*r*r))*Math.pow(2,8) + 4*g*g + ((767 - rmean*b*b)*Math.pow(2,8));
+
+		return distance;
+	}
+
 
 }
