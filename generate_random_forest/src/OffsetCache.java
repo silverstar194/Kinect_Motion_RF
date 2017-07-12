@@ -7,15 +7,26 @@ import java.util.Scanner;
 
 /**
  * @author Admin
- *
+ * Logic behind concurrent threads: all the threads can read from elements just fine as they are not modified.
+ * Originally I cached points on the first time they were used but... this isn't going to work with multi. threads easily
+ * Will revist later.
  */
 public class OffsetCache {
+	
+	boolean cacheLock;
 
 	//stores the computed offsets at all the X,Y points
 	private Offset[][] attributesDiffForXYPoint;
 	
 	public OffsetCache(){
 		this.attributesDiffForXYPoint=  new Offset[MasterConstants.IMG_WIDTH][MasterConstants.IMG_HEIGHT];
+
+		
+		for(int i=0; i<MasterConstants.IMG_WIDTH; i++){
+			for(int j=0; j<MasterConstants.IMG_HEIGHT; j++){
+				cachePoint(i, j);
+			}
+		}
 	}
 	
 	/**
@@ -26,11 +37,6 @@ public class OffsetCache {
 	 * @return
 	 */
 	public Offset getOffSets(int x, int y){ 
-		
-		//stored?
-		if(this.attributesDiffForXYPoint[x][y] == null){
-			cachePoint(x,y);
-		}
 		return this.attributesDiffForXYPoint[x][y];
 	}
 	

@@ -62,6 +62,7 @@ public class Image {
 	public void loadImage(){
 
 		try {
+			//read is thread safe
 			this.imagePixalArrayColor = ImageIO.read(Files.newInputStream(Paths.get(absolutePathColor)));
 			this.imagePixalArrayDepth = ImageIO.read(Files.newInputStream(Paths.get(absolutePathDepth)));
 		} catch (IOException e) {

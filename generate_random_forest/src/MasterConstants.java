@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Admin
@@ -7,7 +8,7 @@ import java.util.HashMap;
 public class MasterConstants {
 
 	//This defines all images paths we can draw from for data
-	static final HashMap<String, Image> images = new HashMap<>();
+	static final ConcurrentHashMap<String, Image> images = new ConcurrentHashMap<>();
 
 	//This is the root directory that holds images
 	static final String imageDirectory = "/Users/Admin/Desktop/TestKinect/sample_trimmed";
@@ -44,6 +45,8 @@ public class MasterConstants {
 	static final int OUTER_RING = 42;
 
 	static final HashMap<Integer, Short> MAP_COLORS_TO_PARTS = new HashMap<>();
+	
+	static int CORES = Runtime.getRuntime().availableProcessors();
 
 	/**
 	 * This maps tuples to values for body parts
