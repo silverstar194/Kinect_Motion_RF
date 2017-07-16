@@ -1,5 +1,7 @@
 import java.util.HashMap;
+import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * @author Admin
@@ -8,7 +10,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MasterConstants {
 
 	//This defines all images paths we can draw from for data
-	static final ConcurrentHashMap<String, Image> images = new ConcurrentHashMap<>();
+	static final Queue<Image> GLOBAL_IMAGES = new ConcurrentLinkedQueue<>();
+
 
 	//This is the root directory that holds images
 	static final String imageDirectory = "/Users/Admin/Desktop/TestKinect/sample_trimmed";

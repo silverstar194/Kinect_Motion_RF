@@ -37,7 +37,7 @@ public class ImageThread extends Thread{
 			image.unloadFrameImages();
 
 			//stores image to master list for analysis
-			MasterConstants.images.put(colorImagePath.substring(colorImagePath.length()-"120_17_Male_normal_trimmed/depth/120_17_d_0001.png".length(), colorImagePath.length()).replace("/", ""), image);
+			MasterConstants.GLOBAL_IMAGES.add(image);
 			System.out.println("File "+colorImagePath+ " on Thread #"+threadNumber);
 		}
 

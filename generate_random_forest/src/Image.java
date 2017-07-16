@@ -206,7 +206,15 @@ public class Image {
 		//this should never happen, caught as error
 		return -1;
 	}
+	
+	short getAttributeValue(int xValue, int yValue, int attributeIndex){
+		return this.attributes.get(new XYPoint(xValue, yValue))[attributeIndex];
+	}
 
+	int getInstanceLabel(int xValue, int yValue){
+		//attributes for a pixel hold a label in there upset 12-16 bits
+		return (this.attributes.get(new XYPoint(xValue, yValue))[0] & 0x1F);
+	}
 
 	@Override
 	public boolean equals(Object other) {
