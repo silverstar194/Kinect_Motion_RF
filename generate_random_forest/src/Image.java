@@ -27,7 +27,7 @@ public class Image {
 	private BufferedImage imagePixalArrayDepth;
 
 	//attributes of the image that are used to classify in random forest
-	private HashMap<XYPoint, short[]> attributes;
+	public HashMap<XYPoint, short[]> attributes;
 
 	//cache is used to avoid redundant offset calc. of offsets
 	//this is shared between images
@@ -52,6 +52,14 @@ public class Image {
 		this.absolutePathDepth = absolutePathDepth;
 		this.offsetCacheForCalulations =  offsetCacheForCalulations;
 		this.attributes = new HashMap<>();
+	}
+	
+	/**
+	 * Copy constructor for subsets
+	 * 
+	 */
+	public Image(Image oldImage){
+		this.attributes = (HashMap<XYPoint, short[]>) oldImage.attributes.clone();
 	}
 
 	/**
@@ -90,6 +98,7 @@ public class Image {
 	 * The upper 5-bits will be used to hold info about what body part it is
 	 */
 	public void calculateImageAttributes(){
+
 		//fetch in the gray image date as a raw short data
 		DataBufferUShort buffer = (DataBufferUShort)imagePixalArrayDepth.getRaster().getDataBuffer();
 		short[] arrayUShort = buffer.getData();
@@ -97,16 +106,25 @@ public class Image {
 		//Loop through each pixel
 		for(int x=0; x<MasterConstants.IMG_WIDTH; x++){
 			for(int y=0; y<MasterConstants.IMG_HEIGHT; y++){
-
+				
 				//get body part value of current point
 				Color rgb = new Color(imagePixalArrayColor.getRGB(x, y));
 				int bodyPartValue = Integer.parseInt(""+rgb.getRed()+rgb.getGreen()+rgb.getBlue());
-
-
+				
+				//issue here with value parsing
+				System.out.println("computing"+((arrayUShort[x + y * MasterConstants.IMG_WIDTH] & 0xffff) >> 5) +""+bodyPartValue);
+				
 				//checks is pixel is background
 				if(((arrayUShort[x + y * MasterConstants.IMG_WIDTH] & 0xffff) >> 5) == 2047 || bodyPartValue == 0){
 					continue;
 				}
+				
+				//skips pixels that are not background randomly to have a good sample but not excessive data
+				if(randomBoolean()){
+					continue;
+				}
+				
+
 
 				//Fetches the correct offsets from calculation or cache
 				Offset offsets = offsetCacheForCalulations.getOffSets(x, y);
@@ -155,7 +173,7 @@ public class Image {
 
 					//OR bitmask for bodyPart with grayScalePart part to set bits 12-15 indicating body part
 					attributes[xy.counter] =  (short)(bodyPart | grayScalePart);
-
+					
 					this.attributes.put(xyPointKey, attributes);
 
 				}
@@ -165,6 +183,13 @@ public class Image {
 
 	}
 
+	/**
+	 * Expand outward from a unknown pixel color until we find one we know.
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	private short useContentToGetBodyPart(int x, int y){
 		int[][] directions = {{1,0}, {0,1}, {1,1}, {-1,-1}, {-1,0}, {0,-1}, {1,-1}, {-1,1}};
 
@@ -207,13 +232,52 @@ public class Image {
 		return -1;
 	}
 	
-	short getAttributeValue(int xValue, int yValue, int attributeIndex){
-		return this.attributes.get(new XYPoint(xValue, yValue))[attributeIndex];
+	/**
+	 * Get pixel attribute value with some bitwise calcs.
+	 * 
+	 * @param xValue
+	 * @param yValue
+	 * @param attributeIndex
+	 * @return
+	 */
+	int getAttributeValue(int xValue, int yValue, int attributeIndex){
+		
+		short[] attributesForXYPoint = this.attributes.get(new XYPoint(xValue, yValue));
+		
+		if(attributesForXYPoint == null){
+			System.out.println("Error reading attributes for: "+new XYPoint(xValue, yValue));
+			System.exit(1);
+		}
+		
+		return (attributesForXYPoint[attributeIndex] & 0b1111111111100000);
 	}
-
+	
+	/**
+	 * Check if pixel has attributes or is a background pixel
+	 * 
+	 * @param xValue
+	 * @param yValue
+	 * @return
+	 */
+	boolean attributeExistAt(int xValue, int yValue){
+		short[] attributesForXYPoint = this.attributes.get(new XYPoint(xValue, yValue));
+		
+		if(attributesForXYPoint == null){
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * Get pixel label with bitwise calcs
+	 * 
+	 * @param xValue
+	 * @param yValue
+	 * @return
+	 */
 	int getInstanceLabel(int xValue, int yValue){
 		//attributes for a pixel hold a label in there upset 12-16 bits
-		return (this.attributes.get(new XYPoint(xValue, yValue))[0] & 0x1F);
+		return (this.attributes.get(new XYPoint(xValue, yValue))[0] & 0b0000000000011100);
 	}
 
 	@Override
@@ -229,6 +293,16 @@ public class Image {
 		Image other_cast = (Image) other;
 
 		return other_cast.absolutePathColor.equals(this.absolutePathColor) && other_cast.absolutePathDepth.equals(this.absolutePathDepth);
+	}
+	
+	/**
+	 * Use this to randomly select pixels from image.
+	 * This gives us a random sample, instead of using them all. That would be alot
+	 * 
+	 * @return
+	 */
+	private boolean randomBoolean(){
+	    return Math.random() < MasterConstants.RANDOM_PERCENT;
 	}
 
 }

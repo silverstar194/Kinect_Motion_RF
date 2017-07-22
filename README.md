@@ -1,7 +1,7 @@
 # Kinect_Motion_RF
-Building a Kinect from Scratch With Random Forests and Blender animations
+Building a Kinect from Scratch With Random Forests and Blender animations Generated From Mo-Cap Data
 
-## Final Flow
+## High Level: Final Flow
 ## Input Layer
 The input layer uses OpenKinect (https://openkinect.org/wiki/Main_Page) to pull the raw depth and RBG images off of the Kinect hardware. The depth image is sent to filter layer for pre-processing before it is run through the random forest for classification.
 	
@@ -22,7 +22,7 @@ Blender 3D render software (https://www.blender.org/) was paired with Carnegie M
 
 ### Pre and Post Processing
 
-In post processing the frames needed to be trimmed to scaled. I found a memory issue in PIL image proccessing library and was only able to use 3 threads even with 144gb of memory. Some images ended up comsuming 30gb+.
+In post processing the frames needed to be trimmed to scaled. I found a memory issue in PIL image processing library and was only able to use 3 threads even with 144gb of memory. Some images ended up consuming 30gb+.
 
 ### Scale
 The humans needed to be scaled in two ways:

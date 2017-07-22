@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 
 /**
+ * Used for k-clusting and rgb in 3D space
+ * 
  * @author Admin
  *
  */

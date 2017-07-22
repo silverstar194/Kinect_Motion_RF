@@ -18,8 +18,6 @@ public class DecTreeNode {
 	//Attribute split at number (i.e. above or below)
 	int attributeSplitNum;
 	
-	int parentAttributeSplitNum; // if is the root, set to null
-	
 	//for printing attributeIndex + attributeSplitNum
 	String attribute;
 	
@@ -28,12 +26,13 @@ public class DecTreeNode {
 	
 	//holds the children of split point
 	List<DecTreeNode> children;
+	
+	String id;
+	String parentId;
 
-	DecTreeNode(int label, int attributeattributeIndex, int attributeSplitNum,  int parentAttributeSplitNum, boolean terminal) {
-		this.label = label;
-		this.attributeIndex = attributeattributeIndex;
+	DecTreeNode(int attributeIndex, int attributeSplitNum, boolean terminal) {
+		this.attributeIndex = attributeIndex;
 		this.attributeSplitNum =  attributeSplitNum;
-		this.parentAttributeSplitNum = parentAttributeSplitNum;
 		
 		//for pretty print
 		this.attribute = "attributeIndex: "+attributeIndex+" attributeSplitNum: "+attributeSplitNum;

@@ -45,20 +45,31 @@ public class DataHandler {
 	 * List all files from a directory and its subdirectories
 	 * @param directoryName to be listed
 	 */
-	ArrayList<String> imageFiles = new ArrayList<String>(MasterConstants.ESTIMATED_IMAGE_AMOUNT);
-	public void listFilesAndFilesSubDirectories(String directoryName, String fileType, String filterBy){
+	public ArrayList<String> imageFiles = new ArrayList<String>(MasterConstants.ESTIMATED_IMAGE_AMOUNT);
+	public void listFilesAndFilesSubDirectories(String directoryName, String fileType, String filterBy, int getEveryNthFile){
 		File directory = new File(directoryName);
-	
+
 		//get all the files from a directory
 		File[] fList = directory.listFiles();
 		for (File file : fList){
-			if (file.isFile() && file.getName().contains(fileType) && file.getName().contains(filterBy)){
+
+			int frameNum = -1;
+			if(file.getPath().contains(fileType)){
+				String[] tokens = file.getPath().split("/");
+				String[] fileName = tokens[tokens.length-1].split("_");
+				frameNum = Integer.parseInt(fileName[fileName.length-1].substring(0, fileName[fileName.length-1].length()-4));
+			}
+
+			if (file.isFile() && file.getName().contains(fileType) && file.getName().contains(filterBy) && frameNum % getEveryNthFile == 0){
 				imageFiles.add(file.getAbsolutePath());
+				System.out.println(file.getAbsolutePath());
 			} else if (file.isDirectory()){
-				listFilesAndFilesSubDirectories(file.getAbsolutePath(), fileType, filterBy);
+				listFilesAndFilesSubDirectories(file.getAbsolutePath(), fileType, filterBy, getEveryNthFile);
 			}
 		}
 	}
-	
+
+
+
 }
 

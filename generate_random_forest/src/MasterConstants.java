@@ -47,10 +47,31 @@ public class MasterConstants {
 	//how many pixels away final ring it
 	static final int OUTER_RING = 42;
 
+	//creats a map between body parts and binary values
 	static final HashMap<Integer, Short> MAP_COLORS_TO_PARTS = new HashMap<>();
 	
+	//total cores JVM can see and I can use
 	static int CORES = Runtime.getRuntime().availableProcessors();
+	
+	//number of random splits to consider
+	static int NUM_TO_USE_FOR_INFO_GAIN = 100;
+	
+	//mod % EVERY_NTH_FRAME tell which frames to use
+	//I don't want to use every one because they are vastly the same
+	static int EVERY_NTH_FRAME = 1;
+	
+	//how often to sample pixel in frame
+	static double RANDOM_PERCENT = .5;
 
+	//set up constants for bit-mapping of body part
+	static short BACKGROUND = 0;
+	static short LEFT_LEG = 0b0000000000010000;
+	static short RIGHT_LEG = 0b0000000000001000;
+	static short RIGHT_SHOULDER = 0b0000000000011000;
+	static short BELLY = 0b0000000000000100;
+	static short HEAD = 0b0000000000010100;
+	static short RIGHT_ARM = 0b0000000000001100;
+	static short LEFT_ARM = 0b0000000000011100;
 	/**
 	 * This maps tuples to values for body parts
 	 * 
@@ -65,39 +86,39 @@ public class MasterConstants {
 	public static void initMap(){
 		
 		//background
-		MAP_COLORS_TO_PARTS.put(0, (short)0);
+		MAP_COLORS_TO_PARTS.put(0, MasterConstants.BACKGROUND);
 		
 		//left leg
-		MAP_COLORS_TO_PARTS.put(2542540, (short)0x800);
-		MAP_COLORS_TO_PARTS.put(2342340, (short)0x800);
-		MAP_COLORS_TO_PARTS.put(2122120, (short)0x800);
+		MAP_COLORS_TO_PARTS.put(2542540, MasterConstants.LEFT_LEG);
+		MAP_COLORS_TO_PARTS.put(2342340, MasterConstants.LEFT_LEG);
+		MAP_COLORS_TO_PARTS.put(2122120,MasterConstants.LEFT_LEG);
 		
 		//right leg
-		MAP_COLORS_TO_PARTS.put(12700, (short)0x1000);
-		MAP_COLORS_TO_PARTS.put(11700, (short)0x1000);
-		MAP_COLORS_TO_PARTS.put(10500, (short)0x1000);
-		MAP_COLORS_TO_PARTS.put(23400, (short)0x1000);
+		MAP_COLORS_TO_PARTS.put(12700, MasterConstants.RIGHT_LEG);
+		MAP_COLORS_TO_PARTS.put(11700, MasterConstants.RIGHT_LEG);
+		MAP_COLORS_TO_PARTS.put(10500, MasterConstants.RIGHT_LEG);
+		MAP_COLORS_TO_PARTS.put(23400, MasterConstants.RIGHT_LEG);
 		
 		//right shoulder
-		MAP_COLORS_TO_PARTS.put(1260254, (short)0x1800);
-		MAP_COLORS_TO_PARTS.put(1160254, (short)0x1800);
+		MAP_COLORS_TO_PARTS.put(1260254, MasterConstants.RIGHT_SHOULDER);
+		MAP_COLORS_TO_PARTS.put(1160254, MasterConstants.RIGHT_SHOULDER);
 		
 		//belly
-		MAP_COLORS_TO_PARTS.put(2541270, (short)0x2000);
-		MAP_COLORS_TO_PARTS.put(2392340, (short)0x2000);
+		MAP_COLORS_TO_PARTS.put(2541270, MasterConstants.BELLY);
+		MAP_COLORS_TO_PARTS.put(2392340, MasterConstants.BELLY);
 		
 		//head
-		MAP_COLORS_TO_PARTS.put(25400, (short)0x2800);
+		MAP_COLORS_TO_PARTS.put(25400, MasterConstants.HEAD);
 		
 		//right arm
-		MAP_COLORS_TO_PARTS.put(2540, (short)0x3000);
-		MAP_COLORS_TO_PARTS.put(2340, (short)0x3000);
-		MAP_COLORS_TO_PARTS.put(2120, (short)0x3000);
+		MAP_COLORS_TO_PARTS.put(2540, MasterConstants.RIGHT_ARM);
+		MAP_COLORS_TO_PARTS.put(2340, MasterConstants.RIGHT_ARM);
+		MAP_COLORS_TO_PARTS.put(2120, MasterConstants.RIGHT_ARM);
 		
 		//left arm
-		MAP_COLORS_TO_PARTS.put(254, (short)0x3800);
-		MAP_COLORS_TO_PARTS.put(234, (short)0x3800);
-		MAP_COLORS_TO_PARTS.put(2392340, (short)0x3800);
+		MAP_COLORS_TO_PARTS.put(254, MasterConstants.LEFT_ARM);
+		MAP_COLORS_TO_PARTS.put(234,  MasterConstants.LEFT_ARM);
+		MAP_COLORS_TO_PARTS.put(2392340,  MasterConstants.LEFT_ARM);
 		
 	}
 

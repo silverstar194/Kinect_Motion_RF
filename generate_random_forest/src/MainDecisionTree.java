@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -6,31 +5,26 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * @author Admin
  *
  */
-public class MainLoadImages {
+public class MainDecisionTree {
 	
-	/**
-	 * Reads in files for calc. their attributes
-	 * 
-	 * @param args
-	 * @throws FileNotFoundException
-	 */
-
-	public static void main(String[] args) throws FileNotFoundException{
-		
+	public static void main(String[] args){
 		//init. mapping of (r, g, b) to body parts
 		MasterConstants.initMap();
 		DataHandler getImages = new DataHandler();
-		getImages.listFilesAndFilesSubDirectories(MasterConstants.imageDirectory+"/random", MasterConstants.FILETYPE, "c", MasterConstants.EVERY_NTH_FRAME);
+		getImages.listFilesAndFilesSubDirectories(MasterConstants.imageDirectory+"/random_split", MasterConstants.FILETYPE, "c", MasterConstants.EVERY_NTH_FRAME);
 		
 		
 		Queue<String> queue = new ConcurrentLinkedQueue<String>();
 		queue.addAll(getImages.imageFiles);
-		
-		//loads images on separate threads
 		ImageThreadHandler loadImagesOnThread = new ImageThreadHandler(MasterConstants.CORES*4, queue);
 		loadImagesOnThread.startThreads();
+		
 
+		//build tree for belly vs all
+		DataSet dataTrain = new DataSet(MasterConstants.GLOBAL_IMAGES, MasterConstants.HEAD);
+		
+		
+		
 	}
 
 }
-

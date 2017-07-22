@@ -2,25 +2,20 @@ import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author Admin
  *
  */
-public class DecitionTree {
+public class DecisionTree {
 	//root of tree we are building
 	private DecTreeNode root;
-
-	//ordered list of class labels
-	private List<Integer> labels; 
 
 	//dataset used for training
 	private DataSet train; 
 
-	//dataset used for tuning
-	private DataSet tune; 
-
-	//used for cross validation after trimming by occam's razor
+	//used for cross validation
 	private DataSet crossValidate;
 
 	/**
@@ -29,41 +24,57 @@ public class DecitionTree {
 	 * @param train: the training set
 	 * @param tune: the tuning set
 	 */
-	DecitionTree(DataSet train, DataSet tune, DataSet crossValidate) {
+	DecisionTree(DataSet train, DataSet crossValidate) {
 		this.train = train;
-		this.tune = tune;
 		this.crossValidate = crossValidate;
+		
+		//kicks off the recursion
+		root = buildTree(train, -1, 0);
+		
+		//prints the tree once done
+		printTreeNode(root, null, 4);
 	}
 
-	//thing I added
-	private DecTreeNode buildTree(DataSet train, int label){
-
+	/**
+	 * Core of the program builds the decision tree from dataset
+	 * 
+	 * 
+	 * @return tree for classification
+	 */
+	private DecTreeNode buildTree(DataSet train, int label, int depth){
+		
+		//see how deep tree is
+		System.out.println("Running Depth "+depth+"...");
+		
 		///(no label, no attribute index, no attribute split value, no parent attribute, by default termination node)
-		DecTreeNode node = new DecTreeNode(-1, -1, -1, -1, true);
+		DecTreeNode node = new DecTreeNode( -1, -1, true);
 
-		//if not instances left to work with
-		if(train.data.isEmpty()){node.label = label; System.out.println("Instances Empty"); return node;}
+		//so tree won't be too deep
+		if(depth > 20){System.out.println("Max depth Reached");return node;}
+		
+		//if no instances left to work with
+		if(train.dataSize == 0){node.label = label; System.out.println("Instances Empty"); return node;}
 
 		//if all the examples are the same at leaf
-		if(!train.allSameLabel){node.label = label; System.out.println("All Same"); return node;}
+		if(train.allSameLabel){node.label = label; System.out.println("All Same"); return node;}
 
 		//no attributes left
-		if(this.train.data.isEmpty()){node.label = majorityClass(train); System.out.println("Attributes Empty"); return node;}
+		if(this.train.allAttributesGone()){node.label = majorityClass(train); System.out.println("Attributes Empty"); return node;}
 
 		//find the best attribute to split on based on information gain
+		System.out.println("Starting Info Gain.."+train.data.size() +" "+ train.dataSize);
+		
+		//this uses information gain at random splits
 		InfoGain gain =  new InfoGain(train);
 
-		//
+		//java has no tuples (at least no easily) so I use string instead to pass two values
 		String[] attributeSplitInfo = gain.maxInfoGain().split(",");
 		int bestAttributeIndex = Integer.parseInt(attributeSplitInfo[0]);
 		int bestAttributeSplitNum = Integer.parseInt(attributeSplitInfo[1]);
 
-		//System.out.println(q);
+		//create new node at split
+		DecTreeNode tree = new DecTreeNode(bestAttributeIndex, bestAttributeSplitNum, false);
 
-		DecTreeNode tree = new DecTreeNode(-1, bestAttributeIndex, bestAttributeSplitNum,  -1, false);
-		//tree.value = train.attributeValues.get(attributes.get(q)).get(0);
-
-		//System.out.println(attributes.size());
 		//binary split on attribute value
 		//below and above split value
 		for(int i=0; i<2; i++){
@@ -77,20 +88,26 @@ public class DecitionTree {
 				subset = subsetBelow(train, bestAttributeIndex, bestAttributeSplitNum);
 			}
 
-			//one I have subset, do same thing here
-			DecTreeNode subtree = buildTree(subset, majorityClass(train));
+			//one I have subset, do same thing one new subsets
+			//cannot use majority class here!! N
+			DecTreeNode subtree = buildTree(subset, majorityClass(train), depth++);
 
+			//once subset is done add where it split to node
 			subtree.attributeSplitNum = bestAttributeSplitNum;
-			subtree.attribute = "bestAttributeIndex "+ bestAttributeIndex+" bestAttributeSplitNum "+bestAttributeSplitNum;
-			subtree.parentAttributeSplitNum = tree.attributeSplitNum;
-
+			
+			//to track nodes across threads
+			subtree.id = generateId();
+			subtree.parentId = tree.id;
+					
+			//for print to file later on
+			subtree.attribute = i+" bestAttributeIndex "+ bestAttributeIndex+" bestAttributeSplitNum "+bestAttributeSplitNum;
+			
 			//add child to tree, building tree up from bottom up!
 			tree.addChild(subtree);
 			tree.terminal = false;
 		}
 		System.out.println("RETURNED");
 		return tree;
-
 	}
 
 
@@ -102,102 +119,116 @@ public class DecitionTree {
 	 */
 
 	private DataSet subsetAbove(DataSet trainSet, int attributeIndex, int attributeSplitNum){
-		//ArrayList<Instance> instancesVar = new ArrayList<>(trainData.instances);
-		//System.out.println("Train Data Size: "+trainData.attributes.size());
-
+	
 		boolean allSameLabel = true;
-		int firstLabel = trainSet.data.peek().getInstanceLabel(0, 0);
-
-		DataSet outputSet = new DataSet();
+		int firstLabel = -1;
+		int removedCount = 0;
+		
+		
+		DataSet outputSet = new DataSet(trainSet);
 		for(Image image : trainSet.data){
+			Image clonedImage = new Image(image);
+			outputSet.data.add(clonedImage);
 			for(int xValue=0; xValue<MasterConstants.IMG_WIDTH; xValue++){
 				for(int yValue=0; yValue<MasterConstants.IMG_WIDTH; yValue++){
 
-					//checks if we added to next dataset
-					if((image.getAttributeValue(xValue, yValue, attributeIndex) >  attributeSplitNum)){
-						outputSet.data.add(image);
-						//System.out.println(i.attributes.get(getAttributeIndex(X, train)) + " " +v);
+					//checks if add to next dataset
+					if(image.attributeExistAt(xValue, yValue) && !(image.getAttributeValue(xValue, yValue, attributeIndex) >  attributeSplitNum)){
+						clonedImage.attributes.remove(new XYPoint(xValue, yValue));
+						removedCount++;
+					}else if(image.attributeExistAt(xValue, yValue)){
 
-						//makes check for is same label, note this check is nested in other check!!
-						if(!(image.getInstanceLabel(xValue, yValue) == firstLabel)){
-							allSameLabel = false;;
-						}	
+						if(firstLabel == -1){
+							firstLabel = image.getInstanceLabel(xValue, yValue);
+						}else{
+							//makes check for is same label, note this check is nested in other check!!
+							if(!(image.getInstanceLabel(xValue, yValue) == firstLabel)){
+								allSameLabel = false;;
+							}	
+
+						}
+
 					}
-
 
 				}
 			}
 		}
 
-		
+
 		//clone old attribute array
 		boolean[][] checkedSplitAttributesNew = trainSet.checkedSplitAttributes.clone();
 		for (int i = 0; i < checkedSplitAttributesNew.length; i++) {
 			checkedSplitAttributesNew[i] = checkedSplitAttributesNew[i].clone();
 		}
-		
+
 		//mark attributes I will never have to split on again as done
 		for(int i=attributeSplitNum; i>0; i--){
 			checkedSplitAttributesNew[attributeIndex][i] = true;
 		}
-		
+
 		//add marked attributes in new array
 		outputSet.checkedSplitAttributes = checkedSplitAttributesNew;
 		
-		//same labels as classification hasn't changed
-		outputSet.labels = trainSet.labels;
-
-		//sets if labels all the same
+		outputSet.dataSize = trainSet.dataSize - removedCount;
+		
 		outputSet.allSameLabel = allSameLabel;
+
 		return outputSet;
 	}
 
 	private DataSet subsetBelow(DataSet trainSet, int attributeIndex, int attributeSplitNum){
 		//ArrayList<Instance> instancesVar = new ArrayList<>(trainData.instances);
 		//System.out.println("Train Data Size: "+trainData.attributes.size());
-		
-		boolean allSameLabel = true;
-		int firstLabel = trainSet.data.peek().getInstanceLabel(0, 0);
 
-		DataSet outputSet = new DataSet();
+		boolean allSameLabel = true;
+		int firstLabel = -1;
+		int removedCount = 0;
+
+		DataSet outputSet = new DataSet(trainSet);
 		for(Image image : trainSet.data){
+			Image clonedImage = new Image(image);
+			outputSet.data.add(clonedImage);
 			for(int xValue=0; xValue<MasterConstants.IMG_WIDTH; xValue++){
 				for(int yValue=0; yValue<MasterConstants.IMG_WIDTH; yValue++){
 
-					if((image.getAttributeValue(xValue, yValue, attributeIndex) <=  attributeSplitNum)){
-						outputSet.data.add(image);
+					if(image.attributeExistAt(xValue, yValue) && !(image.getAttributeValue(xValue, yValue, attributeIndex) <=  attributeSplitNum)){
+						clonedImage.attributes.remove(new XYPoint(xValue, yValue));
+						removedCount++;
 						//System.out.println(i.attributes.get(getAttributeIndex(X, train)) + " " +v);
-						
-						//makes check for is same label, note this check is nested in other check!!
-						if(!(image.getInstanceLabel(xValue, yValue) == firstLabel)){
-							allSameLabel = false;;
+					}else if(image.attributeExistAt(xValue, yValue)){
+						if(firstLabel == -1){
+							firstLabel = image.getInstanceLabel(xValue, yValue);
+						}else{
+							//makes check for is same label, note this check is nested in other check!!
+							if(!(image.getInstanceLabel(xValue, yValue) == firstLabel)){
+								allSameLabel = false;
+							}	
 						}
 					}
 				}
 			}
 		}
-		
-		
+
+
 		//clone old attribute array
 		boolean[][] checkedSplitAttributesNew = trainSet.checkedSplitAttributes.clone();
 		for (int i = 0; i < checkedSplitAttributesNew.length; i++) {
 			checkedSplitAttributesNew[i] = checkedSplitAttributesNew[i].clone();
 		}
-		
+
 		//mark attributes I will never have to split on again as done
 		for(int i=0; i<attributeSplitNum; i++){
 			checkedSplitAttributesNew[attributeIndex][i] = true;
 		}
-		
+
 		//add marked attributes in new array
 		outputSet.checkedSplitAttributes = checkedSplitAttributesNew;
-		
-		
-		//same labels as classification hasn't changed
-		outputSet.labels = trainSet.labels;
-		
+
 		//sets if labels all the same
 		outputSet.allSameLabel = allSameLabel;
+		
+		outputSet.dataSize = trainSet.dataSize - removedCount;
+		
 		return outputSet;
 	}
 
@@ -217,6 +248,9 @@ public class DecitionTree {
 		for(Image image : dataSet.data){
 			for(int xValue=0; xValue<MasterConstants.IMG_WIDTH; xValue++){
 				for(int yValue=0; yValue<MasterConstants.IMG_WIDTH; yValue++){
+					if(!image.attributeExistAt(xValue, yValue)){
+						continue;
+					}
 					if(!countLabel.containsKey(image.getInstanceLabel(xValue, yValue))){
 						countLabel.put(image.getInstanceLabel(xValue, yValue), 1);
 					}else{
@@ -267,6 +301,15 @@ public class DecitionTree {
 				printTreeNode(child, p, k + 1);
 			}
 		}
+	}
+	
+	/**
+	 * Generate a string ID for each node to keep track of them
+	 * 
+	 * @return
+	 */
+	private String generateId(){
+		return UUID.randomUUID().toString();
 	}
 
 

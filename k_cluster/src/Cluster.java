@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 
 /**
+ * Was originally used for k-clustering to try to separate the rgb colors. Was abandon due to a poor distance score and
+ * more reliable "top nth colors" method
  * @author Admin
  *
  */

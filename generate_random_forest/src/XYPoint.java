@@ -45,6 +45,15 @@ public class XYPoint {
 
         return other_cast.x == this.x && other_cast.y == this.y;
     }
+	
+	/**
+	 * 
+	 * Overrides toString so it can be used for nice prining
+	 */
+	@Override
+	public String toString(){
+		return "xValue: "+this.x + " yValue: "+this.y;
+	}
 
 	
 	

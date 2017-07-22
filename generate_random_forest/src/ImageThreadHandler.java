@@ -3,6 +3,7 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
+ * Manages all image loading threads
  * @author Admin
  *
  */
@@ -21,6 +22,10 @@ public class ImageThreadHandler{
 		this.threads = new ArrayList<Thread>();
 	}
 	
+	/**
+	 * Spawns all threads to load images
+	 * 
+	 */
 	public void startThreads(){
 		for(int i=0; i<this.threadNumber; i++){
 			threads.add(new ImageThread(queue, cache, i));

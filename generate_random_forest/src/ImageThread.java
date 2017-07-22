@@ -15,10 +15,14 @@ public class ImageThread extends Thread{
 		this.threadNumber = threadNumber;
 	}
 
+	/**
+	 * Handles creating running and destroying a image loading thread
+	 * 
+	 */
 	private void runImageThread(){
 		//runs until queue is empty
 		while(true){
-			int count = 0;
+		
 			String colorImagePath = queue.poll();
 
 			//queue in empty, all images loaded
@@ -43,6 +47,10 @@ public class ImageThread extends Thread{
 
 	}
 
+	/**
+	 * Required method to start thread
+	 * 
+	 */
 
 	public void run(){
 		runImageThread();
