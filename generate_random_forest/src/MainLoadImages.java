@@ -20,15 +20,17 @@ public class MainLoadImages {
 		//init. mapping of (r, g, b) to body parts
 		MasterConstants.initMap();
 		DataHandler getImages = new DataHandler();
-		getImages.listFilesAndFilesSubDirectories(MasterConstants.imageDirectory+"/random", MasterConstants.FILETYPE, "c", MasterConstants.EVERY_NTH_FRAME);
+		getImages.listFilesAndFilesSubDirectories(MasterConstants.imageDirectory+"random", MasterConstants.FILETYPE, "c", MasterConstants.EVERY_NTH_FRAME);
 		
 		
 		Queue<String> queue = new ConcurrentLinkedQueue<String>();
 		queue.addAll(getImages.imageFiles);
-		
+
 		//loads images on separate threads
 		ImageThreadHandler loadImagesOnThread = new ImageThreadHandler(MasterConstants.CORES*4, queue);
 		loadImagesOnThread.startThreads();
+		
+		
 
 	}
 

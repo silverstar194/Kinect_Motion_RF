@@ -36,13 +36,15 @@ public class ImageThread extends Thread{
 			Image image = new Image(colorImagePath, depthImagePath, cache);
 			image.loadImage();
 			image.calculateImageAttributes();
+//			image.outputImageToDebug();
 
 			//release memory for image data as we have computes attributes already
 			image.unloadFrameImages();
 
 			//stores image to master list for analysis
 			MasterConstants.GLOBAL_IMAGES.add(image);
-			System.out.println("File "+colorImagePath+ " on Thread #"+threadNumber);
+			System.out.println("File "+colorImagePath+ " on Thread #"+threadNumber + " Pixels: "+image.attributes.size());
+//			image.printBodyParts();
 		}
 
 	}

@@ -28,7 +28,7 @@ public class Offset {
 				int yValue = (int)Math.floor(y+Math.cos(2*Math.PI/MasterConstants.NUM_PER_RING*k+r)*r);
 
 				//if its out of the image it is discarded
-				if(yValue >= MasterConstants.IMG_HEIGHT || yValue < 0 || xValue >= MasterConstants.IMG_HEIGHT || xValue < 0){
+				if(yValue >= MasterConstants.IMG_HEIGHT || yValue < 0 || xValue >= MasterConstants.IMG_WIDTH || xValue < 0){
 					continue;
 				}
 				this.XYPoints.add(new XYPoint(xValue, yValue, counter++));

@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class DecTreeNode {
 	//what class the path leads to
-	int label; // for leafs
+	LabelDistribution label; // for leafs
 	
 	//attribute index to split on
 	int attributeIndex;

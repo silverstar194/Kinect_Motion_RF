@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferUShort;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -16,18 +17,14 @@ import javax.imageio.ImageIO;
  */
 public class Image {
 
-	//holds file path for color image
-	private String absolutePathColor;
-
-	//holds file path for depth image
-	private String absolutePathDepth;
+	//holds file path for color/depth image
+	private String absolutePathColor, absolutePathDepth;
 
 	//data from read in image, this is only used to calculate attributes and the discarded to save memory
-	private BufferedImage imagePixalArrayColor;
-	private BufferedImage imagePixalArrayDepth;
+	private BufferedImage imagePixalArrayColor, imagePixalArrayDepth;
 
 	//attributes of the image that are used to classify in random forest
-	public HashMap<XYPoint, short[]> attributes;
+	public HashMap<XYPoint, Attribute> attributes;
 
 	//cache is used to avoid redundant offset calc. of offsets
 	//this is shared between images
@@ -53,13 +50,13 @@ public class Image {
 		this.offsetCacheForCalulations =  offsetCacheForCalulations;
 		this.attributes = new HashMap<>();
 	}
-	
+
 	/**
 	 * Copy constructor for subsets
 	 * 
 	 */
 	public Image(Image oldImage){
-		this.attributes = (HashMap<XYPoint, short[]>) oldImage.attributes.clone();
+		this.attributes = (HashMap<XYPoint, Attribute>) oldImage.attributes.clone();
 	}
 
 	/**
@@ -73,6 +70,13 @@ public class Image {
 			//read is thread safe
 			this.imagePixalArrayColor = ImageIO.read(Files.newInputStream(Paths.get(absolutePathColor)));
 			this.imagePixalArrayDepth = ImageIO.read(Files.newInputStream(Paths.get(absolutePathDepth)));
+
+
+			this.imagePixalArrayColor = ImageIO.read(Files.newInputStream(Paths.get(absolutePathColor)));
+			this.imagePixalArrayDepth = ImageIO.read(Files.newInputStream(Paths.get(absolutePathDepth)));
+			//			System.out.println("Height: "+imagePixalArrayColor.getHeight());
+			//			System.out.println("Width: "+imagePixalArrayColor.getWidth());
+			//			
 		} catch (IOException e) {
 			System.out.println("Failed to load image "+this.absolutePathColor);
 			System.out.println("Failed to load image "+this.absolutePathDepth);
@@ -96,9 +100,9 @@ public class Image {
 	 * Attribute  = pixelValue - pixelValueAtOffset
 	 * Attributes have range of 0 - 2047 this requires 11-bits so we can get away with using a short (16-bits)
 	 * The upper 5-bits will be used to hold info about what body part it is
+	 *  
 	 */
 	public void calculateImageAttributes(){
-
 		//fetch in the gray image date as a raw short data
 		DataBufferUShort buffer = (DataBufferUShort)imagePixalArrayDepth.getRaster().getDataBuffer();
 		short[] arrayUShort = buffer.getData();
@@ -106,24 +110,21 @@ public class Image {
 		//Loop through each pixel
 		for(int x=0; x<MasterConstants.IMG_WIDTH; x++){
 			for(int y=0; y<MasterConstants.IMG_HEIGHT; y++){
-				
+
 				//get body part value of current point
 				Color rgb = new Color(imagePixalArrayColor.getRGB(x, y));
 				int bodyPartValue = Integer.parseInt(""+rgb.getRed()+rgb.getGreen()+rgb.getBlue());
-				
-				//issue here with value parsing
-				System.out.println("computing"+((arrayUShort[x + y * MasterConstants.IMG_WIDTH] & 0xffff) >> 5) +""+bodyPartValue);
-				
+
+
 				//checks is pixel is background
-				if(((arrayUShort[x + y * MasterConstants.IMG_WIDTH] & 0xffff) >> 5) == 2047 || bodyPartValue == 0){
+				if(bodyPartValue == 0){
 					continue;
 				}
-				
+
 				//skips pixels that are not background randomly to have a good sample but not excessive data
 				if(randomBoolean()){
 					continue;
 				}
-				
 
 
 				//Fetches the correct offsets from calculation or cache
@@ -138,12 +139,12 @@ public class Image {
 				if(MasterConstants.MAP_COLORS_TO_PARTS.get(bodyPartValue) == null){
 					//use context
 					bodyPart = useContentToGetBodyPart(x, y);
-					
+
 					if(bodyPart == -1){
 						System.out.print("Something when very wrong with useContentToGetBodyPart(x ,y)");
 						System.exit(-1);
 					}
-					
+
 					//if background
 					if(bodyPart == 0){
 						continue;
@@ -151,7 +152,7 @@ public class Image {
 				}else{
 					bodyPart = (short)MasterConstants.MAP_COLORS_TO_PARTS.get(bodyPartValue);
 				}
-	
+
 				//loop through attributes
 				for(XYPoint xy : offsets.XYPoints){
 
@@ -160,26 +161,45 @@ public class Image {
 					int yxOffsetValue =  ((arrayUShort[xy.x + xy.y * MasterConstants.IMG_HEIGHT] & 0xffff) >> 5);
 
 					//get or create the attribute array
-					short[] attributes = null;
+					Attribute attributes = null;
 					if(!this.attributes.containsKey(xyPointKey)){
-						attributes = new short[MasterConstants.NUM_ATTRIBUTES];
+						attributes = new Attribute();
+						
+						//store the label so it can be used later
+						attributes.label = bodyPart;
 					}else{
 						attributes = this.attributes.get(xyPointKey);
 					}
 
 					//cal. attribute and store
 					//Casting to short will get least-significant 16-bit which is fine as out range is 0-2047
-					short grayScalePart = (short)(xyPointValue - yxOffsetValue);
+					short grayScalePart = (short)(yxOffsetValue - xyPointValue);
 
-					//OR bitmask for bodyPart with grayScalePart part to set bits 12-15 indicating body part
-					attributes[xy.counter] =  (short)(bodyPart | grayScalePart);
 					
+					attributes.attributes[xy.counter] =  (short)(grayScalePart);
+					
+					//print out binary for debug
+					//printToDebugBits(bodyPart, grayScalePart);
 					this.attributes.put(xyPointKey, attributes);
 
 				}
 
 			}
 		}
+
+		//files outs to debug
+		//		String[] colorFile = absolutePathColor.split("/");
+		//		String[] depthFile = absolutePathDepth.split("/");
+		//
+		//		try {
+		//			ImageIO.write(this.imagePixalArrayColor, "png", new File("/Users/Admin/Desktop/output/"+colorFile[colorFile.length-1]));
+		//			ImageIO.write(this.imagePixalArrayDepth, "png", new File("/Users/Admin/Desktop/output/"+depthFile[depthFile.length-1]));
+		//
+		//		} catch (IOException e) {
+		//			// TODO Auto-generated catch block
+		//			e.printStackTrace();
+		//		}
+
 
 	}
 
@@ -218,7 +238,7 @@ public class Image {
 			for(int i=0; i<directions.length; i++){
 				int xNew = x+directions[i][0];
 				int yNew = y+directions[i][1];
-				
+
 				//check within image
 				if(xNew > -1 && xNew < MasterConstants.IMG_WIDTH && yNew > -1 && yNew < MasterConstants.IMG_HEIGHT){
 					queue.add(new XYPoint(xNew, yNew));
@@ -231,7 +251,7 @@ public class Image {
 		//this should never happen, caught as error
 		return -1;
 	}
-	
+
 	/**
 	 * Get pixel attribute value with some bitwise calcs.
 	 * 
@@ -241,17 +261,17 @@ public class Image {
 	 * @return
 	 */
 	int getAttributeValue(int xValue, int yValue, int attributeIndex){
-		
-		short[] attributesForXYPoint = this.attributes.get(new XYPoint(xValue, yValue));
-		
+
+		short[] attributesForXYPoint = this.attributes.get(new XYPoint(xValue, yValue)).attributes;
+
 		if(attributesForXYPoint == null){
 			System.out.println("Error reading attributes for: "+new XYPoint(xValue, yValue));
 			System.exit(1);
 		}
 		
-		return (attributesForXYPoint[attributeIndex] & 0b1111111111100000);
+		return attributesForXYPoint[attributeIndex];
 	}
-	
+
 	/**
 	 * Check if pixel has attributes or is a background pixel
 	 * 
@@ -260,14 +280,14 @@ public class Image {
 	 * @return
 	 */
 	boolean attributeExistAt(int xValue, int yValue){
-		short[] attributesForXYPoint = this.attributes.get(new XYPoint(xValue, yValue));
-		
-		if(attributesForXYPoint == null){
+		Attribute attribute = this.attributes.get(new XYPoint(xValue, yValue));
+
+		if(attribute == null){
 			return false;
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Get pixel label with bitwise calcs
 	 * 
@@ -276,8 +296,8 @@ public class Image {
 	 * @return
 	 */
 	int getInstanceLabel(int xValue, int yValue){
-		//attributes for a pixel hold a label in there upset 12-16 bits
-		return (this.attributes.get(new XYPoint(xValue, yValue))[0] & 0b0000000000011100);
+		//attributes for a pixel hold a label in their upper 12-16 bits
+		return ((this.attributes.get(new XYPoint(xValue, yValue)).label));
 	}
 
 	@Override
@@ -294,7 +314,7 @@ public class Image {
 
 		return other_cast.absolutePathColor.equals(this.absolutePathColor) && other_cast.absolutePathDepth.equals(this.absolutePathDepth);
 	}
-	
+
 	/**
 	 * Use this to randomly select pixels from image.
 	 * This gives us a random sample, instead of using them all. That would be alot
@@ -302,7 +322,93 @@ public class Image {
 	 * @return
 	 */
 	private boolean randomBoolean(){
-	    return Math.random() < MasterConstants.RANDOM_PERCENT;
+		return Math.random() < MasterConstants.RANDOM_PERCENT;
+	}
+
+	/**
+	 * Prints out the number of each bodypart for debugging
+	 * 
+	 * 
+	 */
+
+	public void printBodyParts(){
+		HashMap<Integer, Integer> mapOfParts = new HashMap<>();
+
+		for(int x=0; x<MasterConstants.IMG_WIDTH; x++){
+			for(int y=0; y<MasterConstants.IMG_HEIGHT; y++){
+
+				if(this.attributeExistAt(x, y)){
+					if(mapOfParts.containsKey(this.getInstanceLabel(x, y))){
+						mapOfParts.put(this.getInstanceLabel(x, y), mapOfParts.get(this.getInstanceLabel(x, y))+1);
+					}else{
+						mapOfParts.put(this.getInstanceLabel(x, y), 1);
+					}
+				}
+			}
+		}
+
+		for(Integer p : mapOfParts.keySet()){
+			System.out.println("\t Key: "+p +" ("+p.hashCode()+") "+" Number Of Pixels: "+mapOfParts.get(p));
+		}
+
+	}
+
+	public void printToDebugBits(int bodyPart, int grayScalePart){
+		System.out.println(Integer.toBinaryString(bodyPart) + " " + Integer.toBinaryString(grayScalePart));
+		System.out.println(Integer.toBinaryString(bodyPart | (grayScalePart & 0b111111111111)));
+		System.out.println("Recovered Label: "+Integer.toBinaryString(((bodyPart | (grayScalePart & 0b111111111111)) & 0b111000000000000) >> 12));
+		System.out.println("Recovered Attribute: "+Integer.toBinaryString(((bodyPart | (grayScalePart & 0b111111111111)) & 0b0000111111111111)));
+		System.out.println();
+	}
+
+	public void outputImageToDebug(){
+
+		for(int x=0; x<MasterConstants.IMG_WIDTH; x++){
+			for(int y=0; y<MasterConstants.IMG_HEIGHT; y++){
+				if(this.attributeExistAt(x, y)){
+					int labelValue = this.getInstanceLabel(x, y);
+
+					int rgb = -1;
+
+					if(labelValue == 1){
+						rgb = new Color(255, 0, 0).getRGB();
+					}else if(labelValue == 2){
+						rgb = new Color(0, 255, 0).getRGB();
+					}else if(labelValue == 3){
+						rgb = new Color(0, 0, 255).getRGB();
+					}else if(labelValue == 4){
+						rgb = new Color(0, 115, 115).getRGB();
+					}else if(labelValue == 5){
+						rgb = new Color(115, 115, 115).getRGB();
+					}else if(labelValue == 6){
+						rgb = new Color(115, 0, 255).getRGB();
+					}else if(labelValue == 7){
+						rgb = new Color(255, 115, 0).getRGB();
+					}else{
+						System.out.println("Opps mislabled at: "+x +" "+y);
+						rgb = new Color(0, 0, 0).getRGB();
+					}
+
+					imagePixalArrayColor.setRGB(x, y, rgb);
+
+				}
+
+			}
+
+		}
+
+		String[] colorFile = absolutePathColor.split("/");
+		String[] depthFile = absolutePathDepth.split("/");
+
+		try {
+			ImageIO.write(this.imagePixalArrayColor, "png", new File("/Users/Admin/Desktop/output_debug/"+colorFile[colorFile.length-1]));
+			ImageIO.write(this.imagePixalArrayDepth, "png", new File("/Users/Admin/Desktop/output_debug/"+depthFile[depthFile.length-1]));
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }

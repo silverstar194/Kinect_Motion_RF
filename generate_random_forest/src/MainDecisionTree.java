@@ -11,7 +11,7 @@ public class MainDecisionTree {
 		//init. mapping of (r, g, b) to body parts
 		MasterConstants.initMap();
 		DataHandler getImages = new DataHandler();
-		getImages.listFilesAndFilesSubDirectories(MasterConstants.imageDirectory+"/random_split", MasterConstants.FILETYPE, "c", MasterConstants.EVERY_NTH_FRAME);
+		getImages.listFilesAndFilesSubDirectories(MasterConstants.imageDirectory+"/random", MasterConstants.FILETYPE, "c", MasterConstants.EVERY_NTH_FRAME);
 		
 		
 		Queue<String> queue = new ConcurrentLinkedQueue<String>();
@@ -22,6 +22,9 @@ public class MainDecisionTree {
 
 		//build tree for belly vs all
 		DataSet dataTrain = new DataSet(MasterConstants.GLOBAL_IMAGES, MasterConstants.HEAD);
+		
+		DecisionTree tree = new DecisionTree(dataTrain, dataTrain);
+		
 		
 		
 		

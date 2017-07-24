@@ -14,7 +14,7 @@ public class MasterConstants {
 
 
 	//This is the root directory that holds images
-	static final String imageDirectory = "/Users/Admin/Desktop/TestKinect/sample_trimmed";
+	static final String imageDirectory = "/Users/Admin/Desktop/TestKinect/sample/";
 
 	//This helps with speed by setting ArrayList to large size to start with
 	static final int ESTIMATED_IMAGE_AMOUNT = 1000;
@@ -29,11 +29,11 @@ public class MasterConstants {
 	//It is a radial pattern
 	static int[][][][][] ATTRIBUTES_DIFF;
 
-	//width of image
-	static final int IMG_WIDTH = 640;
+	//width of image untrimmed
+	static int IMG_WIDTH = 640;
 
-	//height of image
-	static final int IMG_HEIGHT = 480;
+	//height of image untrimmed
+	static int IMG_HEIGHT = 480;
 
 	//how many attributes in each ring
 	static final int NUM_PER_RING = 5;
@@ -54,24 +54,38 @@ public class MasterConstants {
 	static int CORES = Runtime.getRuntime().availableProcessors();
 	
 	//number of random splits to consider
-	static int NUM_TO_USE_FOR_INFO_GAIN = 100;
+	static int NUM_TO_USE_FOR_INFO_GAIN = 20;
+	
+	//cut off for how deep the tree can go
+	static int DEPTH_CUT_OFF = 5;
+	
+	//cut off for minimum instances before distribution
+	//this is computed to be .25% of total instances
+	static int INSTANCE_CUT_OFF = (int)(20*500*.0025);
+			
+	//target number of pixels from each frame
+	static int TARGET_SAMPLE_SIZE = 2000;
 	
 	//mod % EVERY_NTH_FRAME tell which frames to use
 	//I don't want to use every one because they are vastly the same
 	static int EVERY_NTH_FRAME = 1;
 	
+//	//how often to sample pixel in frame
+//	static double RANDOM_PERCENT = .7;
+//	
 	//how often to sample pixel in frame
-	static double RANDOM_PERCENT = .5;
+		static double RANDOM_PERCENT = .995;
 
 	//set up constants for bit-mapping of body part
 	static short BACKGROUND = 0;
-	static short LEFT_LEG = 0b0000000000010000;
-	static short RIGHT_LEG = 0b0000000000001000;
-	static short RIGHT_SHOULDER = 0b0000000000011000;
-	static short BELLY = 0b0000000000000100;
-	static short HEAD = 0b0000000000010100;
-	static short RIGHT_ARM = 0b0000000000001100;
-	static short LEFT_ARM = 0b0000000000011100;
+	static short LEFT_LEG = 1;
+	static short RIGHT_LEG = 2;
+	static short RIGHT_SHOULDER = 3;
+	static short BELLY = 4;
+	static short HEAD = 5;
+	static short RIGHT_ARM = 6;
+	static short LEFT_ARM = 7;
+
 	/**
 	 * This maps tuples to values for body parts
 	 * 

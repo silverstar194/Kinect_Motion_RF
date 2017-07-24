@@ -7,8 +7,7 @@
  */
 public class Threshold {
 	
-	public int attributeIndex;
-	public int splitPoint;
+	public int attributeIndex, splitPoint;
 	
 	public Threshold(int attributeIndex, int splitPoint){
 		this.attributeIndex = attributeIndex;

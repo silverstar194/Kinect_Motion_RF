@@ -15,11 +15,15 @@ public class DataSet {
 	//so lets store it and compute in parts for better performance
 	public int dataSize;
 	
+	
 	//values I do not need to recheck as I have already split on them
 	public boolean[][] checkedSplitAttributes;
 	
 	//allows to classify one body part vs all others
 	public int labelForOneVsAll;
+	
+	//allows for all same label to be known
+	public LabelDistribution label;
 
 	//holds all labels for classification in set
 	public List<Label> labels;
@@ -34,7 +38,7 @@ public class DataSet {
 		//which label for label vs all
 		this.labelForOneVsAll = labelForOneVsAll;
 		
-		//add label and NOT label to lables
+		//add label and NOT label to labels
 		labels = new ArrayList<Label>();
 		labels.add(new Label(labelForOneVsAll, false));
 		labels.add(new Label(labelForOneVsAll, true));
@@ -59,6 +63,7 @@ public class DataSet {
 	public DataSet(DataSet dataSetOld){
 		this.data = new ConcurrentLinkedQueue<Image>();
 		this.labels = dataSetOld.labels;
+
 		//note dataSize is incremented as each pixel is added to data
 	}
 	
@@ -73,6 +78,7 @@ public class DataSet {
 				if(!checkedSplitAttributes[i][j]){return false;}
 			}
 		}
+		
 		return true;
 	}
 	

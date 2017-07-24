@@ -48,7 +48,7 @@ public class DataHandler {
 	public ArrayList<String> imageFiles = new ArrayList<String>(MasterConstants.ESTIMATED_IMAGE_AMOUNT);
 	public void listFilesAndFilesSubDirectories(String directoryName, String fileType, String filterBy, int getEveryNthFile){
 		File directory = new File(directoryName);
-
+		System.out.println(directoryName);
 		//get all the files from a directory
 		File[] fList = directory.listFiles();
 		for (File file : fList){
@@ -62,7 +62,7 @@ public class DataHandler {
 
 			if (file.isFile() && file.getName().contains(fileType) && file.getName().contains(filterBy) && frameNum % getEveryNthFile == 0){
 				imageFiles.add(file.getAbsolutePath());
-				System.out.println(file.getAbsolutePath());
+//				System.out.println(file.getAbsolutePath());
 			} else if (file.isDirectory()){
 				listFilesAndFilesSubDirectories(file.getAbsolutePath(), fileType, filterBy, getEveryNthFile);
 			}
